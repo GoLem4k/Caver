@@ -162,11 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3157f6966e64b7a4d887544cfcdcc67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldRadius: 128
-  spawnAreaInRange: 64
-  spawnAreaRadius: 8
-  spaceBetweenWorldAndEdge: 4
-  worldEdgeSize: 16
+  worldRadius: 32
+  spawnAreaInRange: 8
+  spawnAreaRadius: 4
+  spaceBetweenWorldAndEdge: 3
+  worldEdgeSize: 4
   SEED: 12345
   stoneThreshold: 0.3
   dirtMinThreshold: 0.5
@@ -332,6 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576026041}
   - component: {fileID: 576026040}
+  - component: {fileID: 576026042}
   m_Layer: 0
   m_Name: initializer
   m_TagString: Untagged
@@ -369,6 +370,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &576026042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576026039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7f1bdcbd834fb4d8534474a107e318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f52669f5ae8bb4b97e9e00729e51dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocksTilemap: {fileID: 1652383863}
   oreTilemap: {fileID: 2076853353}
   decorationsTilemap: {fileID: 0}
   dirtTile: {fileID: 11400000, guid: 85524a5dc345ad3438a39aa4d5738602, type: 2}

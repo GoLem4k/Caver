@@ -5,7 +5,7 @@ public class TileManager : MonoBehaviour
 {
 
     [Header("Прочность блоков")] [SerializeField]
-    private Tilemap blocksTilemap;
+    public static Tilemap blocksTilemap;
 
     [SerializeField] private Tilemap oreTilemap;
     [SerializeField] private Tilemap decorationsTilemap;
@@ -21,7 +21,7 @@ public class TileManager : MonoBehaviour
 
     public void Initialize()
     {
-
+        blocksTilemap = gameObject.GetComponentInChildren<Tilemap>();
     }
 
     public void SetCell(Vector3Int pos, BlockType type)
@@ -31,6 +31,7 @@ public class TileManager : MonoBehaviour
         {
             case BlockType.None:
                 ClearCell(pos, TileType.Block);
+                BlockDataManager.removeBlockAtPos(pos);
                 return;
             case BlockType.Dirt:
                 blockTile = dirtTile;
@@ -49,7 +50,9 @@ public class TileManager : MonoBehaviour
                 //blockTile = debugSmartTile;
                 return;
         }
-
+        
+        BlockDataManager.removeBlockAtPos(pos);
+        new BlockData(type, pos);
         if (blockTile != null) blocksTilemap.SetTile(pos, blockTile);
     }
 
@@ -70,15 +73,12 @@ public class TileManager : MonoBehaviour
         if (oreTile != null) oreTilemap.SetTile(pos, oreTile);
     }
 
-    public void ClearCell(Vector3Int pos, TileType type) {
+    public static void ClearCell(Vector3Int pos, TileType type) {
         Tilemap tilemap = null;
         switch (type)
         {
             case TileType.Block:
                 tilemap = blocksTilemap;
-                break;
-            case TileType.Ore:
-                tilemap = oreTilemap;
                 break;
             default:
                 Debug.Log("Ошибка с типом тайла для удаления, тип не найден");
@@ -110,10 +110,10 @@ public class TileManager : MonoBehaviour
 
 public enum BlockType {
     None,
-    Dirt,
-    Stone,
-    Expstone,
-    Endstone
+    Dirt = 50,
+    Stone = 100,
+    Expstone = 40,
+    Endstone = 500
 }
 
 public enum OreType {

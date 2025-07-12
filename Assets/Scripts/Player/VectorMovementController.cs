@@ -158,7 +158,7 @@ public class VectorMovementController : PausedBehaviour
             previousInput = Vector2.zero;
             moveSpeed = minSpeed;
 
-            //DamageBlock(dualGridTilemap.placeholderTilemap.WorldToCell(contact.point - contact.normal * 0.2f));
+            //BlockDataManager.damageBlock(dualGridTilemap.placeholderTilemap.WorldToCell(contact.point - contact.normal * 0.2f));
         }
     }
 

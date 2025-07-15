@@ -1,14 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
 
+    public static TileManager I { get; private set; }
+    
     [Header("Прочность блоков")] [SerializeField]
-    public static Tilemap blocksTilemap;
+    public static Tilemap BlocksTilemap;
 
-    [SerializeField] private Tilemap oreTilemap;
-    [SerializeField] private Tilemap decorationsTilemap;
+    public static Tilemap CracksTilemap;
+    public static Tile[] CrackTiles;
+
+    [SerializeField] private Tilemap blocksTilemap;
+    [SerializeField] private Tilemap cracksTilemap;
+
+    [SerializeField] private Tile[] crackTiles;
 
     [SerializeField] private BlockTile dirtTile;
     [SerializeField] private BlockTile stoneTile;
@@ -16,12 +25,16 @@ public class TileManager : MonoBehaviour
     [SerializeField] private BlockTile endstoneTile;
     [SerializeField] private BlockTile debugSmartTile;
 
-    [SerializeField] private OreTile copperOreTile;
-    [SerializeField] private OreTile debugOreTile;
+    private List<Vector3Int> toDestroy = new List<Vector3Int>();
+    
 
     public void Initialize()
     {
-        blocksTilemap = gameObject.GetComponentInChildren<Tilemap>();
+        if (I == null) I = this;
+        else Destroy(gameObject);
+        BlocksTilemap = blocksTilemap;
+        CracksTilemap = cracksTilemap;
+        CrackTiles = crackTiles;
     }
 
     public void SetCell(Vector3Int pos, BlockType type)
@@ -30,7 +43,7 @@ public class TileManager : MonoBehaviour
         switch (type)
         {
             case BlockType.None:
-                ClearCell(pos, TileType.Block);
+                ClearCell(pos);
                 BlockDataManager.removeBlockAtPos(pos);
                 return;
             case BlockType.Dirt:
@@ -56,54 +69,68 @@ public class TileManager : MonoBehaviour
         if (blockTile != null) blocksTilemap.SetTile(pos, blockTile);
     }
 
-    public void SetCell(Vector3Int pos, OreType type)
+    public static void damageBlock(Vector3Int pos, float damage)
     {
-        OreTile oreTile;
-        switch (type)
+        BlockData t = BlockDataManager.BLOCKDATALIST.Find(b => b.position == pos);
+        if (t == null)
         {
-            case OreType.Copper:
-                oreTile = copperOreTile;
-                break;
-            default:
-                Debug.Log("Ошибка с типом руды для размещения");
-                //oreTile = debugOreTile;
-                return;
+            Debug.LogWarning($"[BlockDataManager] Нет блока по координате {pos}");
+            return;
         }
 
-        if (oreTile != null) oreTilemap.SetTile(pos, oreTile);
+        t.setDurability(t.durability - damage);
     }
-
-    public static void ClearCell(Vector3Int pos, TileType type) {
-        Tilemap tilemap = null;
-        switch (type)
-        {
-            case TileType.Block:
-                tilemap = blocksTilemap;
-                break;
-            default:
-                Debug.Log("Ошибка с типом тайла для удаления, тип не найден");
-                return;
-        }
-        if (tilemap != null) tilemap.SetTile(pos, null);
-    }
-
-    public bool IsBlockOnPos(Vector3Int pos, BlockType type)
+    
+    public IEnumerator DamageNeighborsWithDelay(Vector3Int origin, float damage)
     {
-        var tile = blocksTilemap?.GetTile(pos);
+        float delay = 0.1f; // задержка между разрушениями
+
+        foreach (var offset in WorldGenerator.NEIGHBOURS4X)
+        {
+            Vector3Int neighborPos = origin + offset;
+
+            if (IsBlockOnPos(neighborPos, BlockType.Expstone))
+            {
+                if (!toDestroy.Contains(neighborPos))
+                {
+                    toDestroy.Add(neighborPos);
+                    yield return new WaitForSeconds(delay);
+                    damageBlock(neighborPos, damage);
+                    toDestroy.Remove(neighborPos);
+                }
+            }
+        }
+    }
+    
+    public static void UpdateCracks(Vector3Int pos, BlockData data)
+    {
+        
+        if (data.durability >= data.maxDurability || data.durability <= 0)
+        {
+            CracksTilemap.SetTile(pos, null);
+            return;
+        }
+
+        float percent = 1f - data.durability / data.maxDurability;
+        int index = Mathf.RoundToInt(percent * (CrackTiles.Length - 1));
+        index = Mathf.Clamp(index, 0, CrackTiles.Length - 1);
+
+        CracksTilemap.SetTile(pos, CrackTiles[index]);
+    }
+
+    public static void ClearCell(Vector3Int pos) {
+        BlocksTilemap.SetTile(pos, null);
+    }
+
+    public static bool IsBlockOnPos(Vector3Int pos, BlockType type)
+    {
+        var tile = BlocksTilemap.GetTile(pos);
 
         if (type == BlockType.None)
         {
             return tile == null;
         }
         return tile is BlockTile blockTile && blockTile.type == type;
-    }
-
-
-    public bool IsOreOnPos(Vector3Int pos, OreType type)
-    {
-        var tile = oreTilemap?.GetTile(pos);
-        if (tile is OreTile oreTile) return oreTile.type == type;
-        return false;
     }
 }
 
@@ -114,15 +141,4 @@ public enum BlockType {
     Stone = 100,
     Expstone = 40,
     Endstone = 500
-}
-
-public enum OreType {
-    Copper
-}
-
-public enum TileType
-{
-    Block,
-    Ore,
-    Decorate
 }

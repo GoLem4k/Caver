@@ -11,11 +11,6 @@ public class BlockDataManager : MonoBehaviour
     public static void removeBlock(BlockData block) { BLOCKDATALIST.Remove(block); }
     public static void removeBlockAtPos(Vector3Int pos) { BLOCKDATALIST.RemoveAll(b => b.position == pos); }
 
-    public static void damageBlock(Vector3Int pos, float damage)
-    {
-        BlockData t = BLOCKDATALIST.Find(b => b.position == pos);
-        t.setDurability(t.durability - damage);
-    }
 
     public override string ToString()
     {

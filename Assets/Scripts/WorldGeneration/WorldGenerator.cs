@@ -17,7 +17,7 @@ public class WorldGenerator : MonoBehaviour
     public static int WORLDRADIUS = 256;
     public static Vector3Int SPAWNPOINT = new Vector3Int(0,0,0);
     //public float noiseScale = 0.1f;
-    public int SEED = 12345;
+    public static int SEED = 12345;
     public float stoneThreshold = 0.3f;
     
     [Header("Шум земли")]
@@ -50,7 +50,7 @@ public class WorldGenerator : MonoBehaviour
         new Vector3Int(1, -1, 0)    // снизу и справа
     };
     
-    Vector3Int[] NEIGHBOURS4X = new Vector3Int[] {
+    public static Vector3Int[] NEIGHBOURS4X = new Vector3Int[] {
         new Vector3Int(1, 0, 0),     // справа
         new Vector3Int(-1, 0, 0),    // слева
         new Vector3Int(0, 1, 0),     // сверху
@@ -136,7 +136,7 @@ public class WorldGenerator : MonoBehaviour
                 {
                     float value = Mathf.PerlinNoise((x + seed) * noiseScale, (y + seed) * noiseScale);
                     Vector3Int pos = new Vector3Int(center.x + x, center.y + y, 0);
-                    if (value > minThreshold && value < maxThreshold && tileManager.IsBlockOnPos(pos, filter))
+                    if (value > minThreshold && value < maxThreshold && TileManager.IsBlockOnPos(pos, filter))
                         tileManager.SetCell(pos, type);
                 }
             }
@@ -145,7 +145,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void gTunnelBlocksToPos(Vector3Int pos, Vector3Int dir, float curvature, int length, BlockType type, BlockType filter = BlockType.None)
     {
-        if (!tileManager.IsBlockOnPos(pos, filter))
+        if (!TileManager.IsBlockOnPos(pos, filter))
         {
             length--;
             tileManager.SetCell(pos, type);

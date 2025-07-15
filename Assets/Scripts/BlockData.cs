@@ -6,7 +6,8 @@ public class BlockData
     Vector3Int _position;
     private float _durability;
     private float _maxDurability;
-    
+    private bool _isBeingDestroyed = false;
+
     public BlockData(BlockType type, Vector3Int position)
     {
         _type = type;
@@ -35,25 +36,41 @@ public class BlockData
         BlockDataManager.addBlock(this);
     }
     
-    public BlockType type {get  {return _type; }}
-    public Vector3Int position {get { return _position; }}
-    public float durability { get { return _durability; }}
-    public float maxDurability {get { return _maxDurability; }}
+    public BlockType type => _type;
+    public Vector3Int position => _position;
+    public float durability => _durability;
+    public float maxDurability => _maxDurability;
 
     public void setDurability(float durability)
     {
-        if (maxDurability == (int)BlockType.Endstone) return;
+        if (_maxDurability == (int)BlockType.Endstone) return;
         _durability = durability;
-        if (_durability < 0) Destroy();
+
+        if (!_isBeingDestroyed)
+            TileManager.UpdateCracks(_position, this);
+
+        if (_durability <= 0 && !_isBeingDestroyed)
+            Destroy();
     }
 
     public override string ToString()
     {
         return $"BlockType: {_type}, position: {_position}, durability: {_durability}, maxDurability: {_maxDurability}";
     }
-    
-    public void Destroy() {
-        TileManager.ClearCell(_position, TileType.Block);
+
+    public void Destroy()
+    {
+        if (_isBeingDestroyed) return;
+        _isBeingDestroyed = true;
+        
+        
+
+        if (this.type == BlockType.Expstone)
+        {
+            TileManager.I.StartCoroutine(TileManager.I.DamageNeighborsWithDelay(_position, _maxDurability));
+        }
+
+        TileManager.ClearCell(_position);
         BlockDataManager.removeBlock(this);
     }
 }

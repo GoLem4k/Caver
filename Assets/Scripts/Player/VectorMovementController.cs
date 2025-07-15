@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class VectorMovementController : PausedBehaviour
 {
@@ -158,7 +159,11 @@ public class VectorMovementController : PausedBehaviour
             previousInput = Vector2.zero;
             moveSpeed = minSpeed;
 
-            //BlockDataManager.damageBlock(dualGridTilemap.placeholderTilemap.WorldToCell(contact.point - contact.normal * 0.2f));
+            Vector3 contactPoint = contact.point - contact.normal * 0.1f;
+            Vector3Int tilePos = TileManager.BlocksTilemap.WorldToCell(contactPoint);
+            //Debug.Log($"contact.point: {contact.point}, adjusted: {contactPoint}, tilePos: {tilePos}");
+            TileManager.damageBlock(tilePos, damage);
+
         }
     }
 

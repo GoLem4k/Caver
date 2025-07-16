@@ -1,27 +1,27 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class VectorMovementController : PausedBehaviour
 {
     public float moveSpeed = 0f;
-    public float minSpeed = 4f;
-    public float maxSpeed = 6f;
-    public float accelerationSpeed = 2f;
-    public float breakingSpeed = 5f;
-    public float rotationSpeed = 0.1f;
+
+    //public float accelerationSpeed = 2f;
+    //public float breakingSpeed = 5f;
+    //public float rotationSpeed = 0.1f;
     public bool canSpeedUp = true;
 
     public float forceSpeed = 0f;
-    public float maxForceSpeed = 10f;
-    public float breakingForceSpeed = 3f;
-
-    public float damage = 40f;
+    //public float maxForceSpeed = 10f;
+    public float breakingForceSpeed = 4f;
 
     //При какой скорости произойдёт отскок
     [SerializeField] private float bounceThreshold = 5f;
-    [SerializeField] private float WallBounceDamping = 0.6f;
+    [SerializeField] private float WallBounceDamping = 0.99f;
 
+    private System.Random rng;
+    
     private Rigidbody2D rb;
     
     private Vector2 inputVector;
@@ -45,6 +45,7 @@ public class VectorMovementController : PausedBehaviour
     public TileManager TileManager;
     
     public void Initialize() {
+        rng = new System.Random(WorldGenerator.SEED);
         rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<PlayerAnimationController>();
 
@@ -67,14 +68,14 @@ public class VectorMovementController : PausedBehaviour
         
         if (inputVector.magnitude > Mathf.Epsilon)
         {
-            moveSpeed = (canSpeedUp && Math.Abs(Vector2.SignedAngle(finalMovement, inputVector)) < 20) ? Mathf.Clamp(moveSpeed + accelerationSpeed * Time.deltaTime, minSpeed, maxSpeed) : minSpeed;
+            moveSpeed = (canSpeedUp && Math.Abs(Vector2.SignedAngle(finalMovement, inputVector)) < 90) ? Mathf.Clamp(moveSpeed + RunData.I.movementSpeed * 0.15f * Time.deltaTime, RunData.I.movementSpeed, RunData.I.movementSpeed*1.2f) : RunData.I.movementSpeed;
     
             // Сглаживаем только если есть ввод
-            previousInput = Vector2.SmoothDamp(previousInput, inputVector, ref inputVelocity, rotationSpeed);
+            previousInput = Vector2.SmoothDamp(previousInput, inputVector, ref inputVelocity, 0.15f - RunData.I.movementSpeed*0.05f);
         }
         else
         {
-            moveSpeed = Mathf.Clamp(moveSpeed - breakingSpeed * Time.deltaTime, 0f, maxSpeed);
+            moveSpeed = Mathf.Clamp(moveSpeed - RunData.I.movementSpeed * 2f * Time.deltaTime, 0f, RunData.I.movementSpeed*1.25f);
 
             // Если полностью остановились — сбрасываем направление
             if (moveSpeed <= Mathf.Epsilon)
@@ -83,7 +84,7 @@ public class VectorMovementController : PausedBehaviour
         
         
         // Здесь можно менять externalForces, например, из других систем (отбрасывание, ветер и т.п.)
-        forceSpeed = Mathf.Clamp(forceSpeed - breakingForceSpeed * Time.deltaTime, 0f, maxForceSpeed);
+        forceSpeed = Mathf.Clamp(forceSpeed - breakingForceSpeed * Time.deltaTime, 0f, RunData.I.reboundScale * 3f);
         if (forceSpeed <= 0) externalForces = Vector2.zero;
         
         inputMovement = previousInput * moveSpeed;
@@ -96,7 +97,7 @@ public class VectorMovementController : PausedBehaviour
             mouseWorldPos.z = 0f; // Обнуляем Z для 2D
             Vector2 direction = (mouseWorldPos - transform.position);
 
-            forceSpeed += debugForce;
+            forceSpeed += RunData.I.reboundScale;
             AddExternalForce(direction.normalized);
         }
 
@@ -154,15 +155,15 @@ public class VectorMovementController : PausedBehaviour
         if (impactDot > 0.1f && forceSpeed >= bounceThreshold)
         {
             Vector2 reflected = Vector2.Reflect(externalForces, normal);
-            forceSpeed = Mathf.Clamp(forceSpeed * WallBounceDamping, 0f, maxForceSpeed);
+            forceSpeed = Mathf.Clamp(forceSpeed * WallBounceDamping, 0f, RunData.I.reboundScale * 3f);
             externalForces = reflected;
             previousInput = Vector2.zero;
-            moveSpeed = minSpeed;
+            moveSpeed = RunData.I.movementSpeed;
 
             Vector3 contactPoint = contact.point - contact.normal * 0.1f;
             Vector3Int tilePos = TileManager.BlocksTilemap.WorldToCell(contactPoint);
             //Debug.Log($"contact.point: {contact.point}, adjusted: {contactPoint}, tilePos: {tilePos}");
-            TileManager.damageBlock(tilePos, damage);
+            TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.reboundDamage * 2f : RunData.I.reboundDamage);
 
         }
     }

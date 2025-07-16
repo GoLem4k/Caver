@@ -37,7 +37,7 @@ public class WorldGenerator : MonoBehaviour
     public float depositChance = 0.01f;
 
     public float[] multipleOreChance = { 1f, 0.9f, 0.5f, 0.2f, 0.05f };
-    public System.Random rng;
+    private System.Random rng;
     
     Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
         new Vector3Int(1, 0, 0),     // справа

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileManager : MonoBehaviour
+public class TileManager : PausedBehaviour
 {
 
     public static TileManager I { get; private set; }
@@ -87,8 +87,13 @@ public class TileManager : MonoBehaviour
 
         foreach (var offset in WorldGenerator.NEIGHBOURS4X)
         {
-            Vector3Int neighborPos = origin + offset;
+            if (PAUSE)
+                while (PAUSE)
+                {
+                    yield return null;
+                }
 
+            Vector3Int neighborPos = origin + offset;
             if (IsBlockOnPos(neighborPos, BlockType.Expstone))
             {
                 if (!toDestroy.Contains(neighborPos))

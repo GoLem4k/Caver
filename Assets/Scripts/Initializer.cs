@@ -7,9 +7,11 @@ public class Initializer : MonoBehaviour
     public VectorMovementController vectorMovementController;
     public PlayerDataManager playerDataManager;
     public UpgradesManager upgradesManager;
+    public RunData runData;
     
     void Start()
     {
+        runData.Initialize();
         tileManager.Initialize();
         worldGenerator.Initialize();
         vectorMovementController.Initialize();

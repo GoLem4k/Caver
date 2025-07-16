@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using System.Linq;
+using Debug = UnityEngine.Debug;
 
 public class UpgradesManager : PausedBehaviour
 {
@@ -8,6 +10,7 @@ public class UpgradesManager : PausedBehaviour
 
     [SerializeField] private List<UpgradeData> _upTotal;
     [SerializeField] private List<GameObject> cardObjInChoice;
+    [SerializeField] private List<UpgradeData> _playerUpgrades;
     private Dictionary<int, int> cardCounter;
     
     public GameObject upMenu;
@@ -16,7 +19,7 @@ public class UpgradesManager : PausedBehaviour
 
     public int choiceAmmountBase = 5;
     
-    public System.Random rng;
+    private System.Random rng;
     
     public void Initialize()
     {
@@ -43,9 +46,9 @@ public class UpgradesManager : PausedBehaviour
             return;
         }
 
-        if (choiceAmmount > choiceAmmountBase) choiceAmmount = choiceAmmountBase;
+        if (choiceAmmount > RunData.I.choiceAmmount) choiceAmmount = RunData.I.choiceAmmount;
         
-        while (cardInChoiceCount < choiceAmmount && safeCounter < 100)
+        while (cardInChoiceCount < choiceAmmount && safeCounter < 250)
         {
             safeCounter++;
 
@@ -53,6 +56,12 @@ public class UpgradesManager : PausedBehaviour
 
             if (cardsInChoiceData.Contains(newCard) || cardCounter[newCard.id] <= 0)
                 continue;
+            
+            if (newCard.type == UpgradeType.Support && rng.NextDouble() < 0.75f) continue;
+            if (newCard.type == UpgradeType.Active && rng.NextDouble() < 0.25f) continue;
+            if (newCard.type == UpgradeType.Magic && rng.NextDouble() < 0.40f) continue;
+            
+            if (!_playerUpgrades.Any(x => x.id == newCard.needId) && !(newCard.needId == 0)) continue;
 
             cardsInChoiceData.Add(newCard); // сохраняем, чтобы не повторялись
 
@@ -68,9 +77,24 @@ public class UpgradesManager : PausedBehaviour
         upMenu.SetActive(true);
     }
 
-
+    /*
+    id 1 - урон пуль
+    id 2 - шанс крита
+    id 3 - урон отскока
+    id 4 - сила отскока
+    id 5 - скорость движения
+    id 6 - прирост опыта в секунду
+    id 7 - объём здоровья
+    id 8 - регенерация здоровья
+    id 101 - возможность стрелять
+    id 102 - возможность критовать
+    id 201 - возможность строить
+    id 202 - глобальный множитель опыта за сломаную руду
+    */
+    
     public void MakeChoice(UpgradeData up)
     {
+        _playerUpgrades.Add(up);
         Debug.Log(up);
         upMenu.SetActive(false);
         PAUSE = false;
@@ -86,6 +110,46 @@ public class UpgradesManager : PausedBehaviour
         foreach (var obj in cardObjInChoice)
         {
             Destroy(obj);
+        }
+
+        switch (up.id)
+        {
+            case 1:
+                RunData.I.bulletDamage += 5;
+                break;
+            case 2:
+                RunData.I.critChance += 0.05f;
+                break;
+            case 3:
+                RunData.I.reboundDamage += 5f;
+                break;
+            case 4:
+                RunData.I.reboundScale += 0.8f;
+                break;
+            case 5:
+                RunData.I.movementSpeed += 0.3f;
+                break;
+            case 6:
+                RunData.I.expPerSecond += 1f;
+                break;
+            case 7:
+                RunData.I.health += 10f;
+                break;
+            case 8:
+                RunData.I.regenerationSpeed += 0.2f;
+                break;
+            case 101:
+                RunData.I.canShoot = true;
+                break;
+            case 102:
+                RunData.I.canCrit = true;
+                break;
+            case 201:
+                RunData.I.canPlaceBlock = true;
+                break;
+            case 202:
+                RunData.I.globalExpMultiplier += 0.01f;
+                break;
         }
     }
     

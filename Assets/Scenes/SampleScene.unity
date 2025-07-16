@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 576026041}
   - component: {fileID: 576026040}
   - component: {fileID: 576026042}
+  - component: {fileID: 576026043}
   m_Layer: 0
   m_Name: initializer
   m_TagString: Untagged
@@ -428,6 +429,7 @@ MonoBehaviour:
   vectorMovementController: {fileID: 1404065268}
   playerDataManager: {fileID: 1404065273}
   upgradesManager: {fileID: 1214530696}
+  runData: {fileID: 576026043}
 --- !u!4 &576026041
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +457,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7f1bdcbd834fb4d8534474a107e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &576026043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576026039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5c82275e8956641a218a6f8fdacd1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reboundDamage: 20
+  movementSpeed: 3
+  reboundScale: 5
+  expPerSecond: 1
+  health: 100
+  regenerationSpeed: 1
+  choiceAmmount: 3
+  canCrit: 0
+  critChance: 0
+  canShoot: 0
+  bulletDamage: 10
+  blockBreakExp: 5
+  canPlaceBlock: 0
+  refreshCount: 0
+  globalExpMultiplier: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +744,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3e98b483179731340829e923716d41df, type: 2}
   - {fileID: 11400000, guid: e7bbd00cc6e19b94ca16df96072d3850, type: 2}
   cardObjInChoice: []
+  _playerUpgrades: []
   upMenu: {fileID: 1214530694}
   upGroup: {fileID: 2078948591}
   upCard: {fileID: 7855447015952235146, guid: a6945e0d22a5e304d87c025cca2fc6dd, type: 3}
@@ -810,18 +840,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  minSpeed: 4
-  maxSpeed: 7
-  accelerationSpeed: 0.5
-  breakingSpeed: 7
-  rotationSpeed: 0.1
   canSpeedUp: 1
   forceSpeed: 0
-  maxForceSpeed: 15
   breakingForceSpeed: 4
-  damage: 20
   bounceThreshold: 1
-  WallBounceDamping: 0.7
+  WallBounceDamping: 0.92
   debugForce: 5
   TileManager: {fileID: 0}
 --- !u!50 &1404065269
@@ -913,8 +936,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _expBar: {fileID: 333036197}
-  _maxExp: 20
-  _expStep: 5
+  _maxExp: 100
+  _expStep: 20
+  _exp: 0
 --- !u!1 &1456239889
 GameObject:
   m_ObjectHideFlags: 0

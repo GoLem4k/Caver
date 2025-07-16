@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88ef2bb04890754ba1937ce3c6b8a03, type: 3}
-  m_Name: pRebound
+  m_Name: pReboundScale
   m_EditorClassIdentifier: 
   _image: {fileID: -1282866944, guid: d4a4a4949c25e294c8ff2e65cc6b015d, type: 3}
   _type: 0
-  _id: 8
-  _count: 1
-  _totalCount: 3
+  _id: 4
+  _needId: 0
+  _totalCount: 5
   _discription: 

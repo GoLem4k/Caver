@@ -3,31 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "upgradeTemplate", menuName = "Scriptable Objects/upgradeTemplate")]
 public class UpgradeData : ScriptableObject
 {
-    [SerializeField] private Sprite _image;
-    [SerializeField] private UpgradeType _type;
+    [SerializeField] private Sprite _imageActive;
+    [SerializeField] private Sprite _imageInactive;
     [SerializeField] private int _id;
-    [SerializeField] private int _needId;
-    [SerializeField] private int _totalCount;
+    [SerializeField] private int _maxLevel;
     [SerializeField] private string _discription;
 
-    public Sprite image => _image;
-    public UpgradeType type => _type;
+    public Sprite imageActive => _imageActive;
+    public Sprite imageInactive => _imageInactive;
     public int id => _id;
-    public int needId => _needId;
-    public int totalCount => _totalCount;
+    public int maxLevel => _maxLevel;
     public string discription => _discription;
 
 
     public override string ToString()
     {
-        return $"ID: {_id}, TYPE: {_type}, TOTAL COUNT: {_totalCount}";
+        return $"ID: {_id} TOTAL COUNT: {_maxLevel}";
     }
-}
-
-public enum UpgradeType
-{
-    Passive,
-    Support,
-    Active,
-    Magic
 }

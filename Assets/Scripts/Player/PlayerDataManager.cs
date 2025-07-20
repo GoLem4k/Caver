@@ -5,7 +5,9 @@ using UnityEngine.Tilemaps;
 public class PlayerDataManager : PausedBehaviour
 {
     public static PlayerDataManager I { get; private set; }
-    
+
+
+    [SerializeField] public int skillPoints;
     [SerializeField] private GameObject _expBar;
     [SerializeField] private float _maxExp;
     [SerializeField] private float _expStep;
@@ -16,6 +18,7 @@ public class PlayerDataManager : PausedBehaviour
         if (I == null) I = this;
         _expBar.transform.localScale = new Vector3Int(0, 1, 0);
         _exp = 0;
+        skillPoints = 0;
     }
 
     public override void GameUpdate()
@@ -27,8 +30,7 @@ public class PlayerDataManager : PausedBehaviour
             _exp -= _maxExp;
             _maxExp += _expStep;
             _expBar.transform.localScale = new Vector3Int(0, 1, 0);
-            PAUSE = true;
-            UpgradesManager.I.UpgradeChoice();
+            skillPoints++;
         }
     }
 }

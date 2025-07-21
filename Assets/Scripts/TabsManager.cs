@@ -30,6 +30,7 @@ public class TabsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
+            CursorManager.I.ResetCursor();
             upgradeMenu.SetActive(!upgradeMenu.activeSelf);
         }
     }

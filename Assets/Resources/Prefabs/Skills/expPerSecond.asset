@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88ef2bb04890754ba1937ce3c6b8a03, type: 3}
-  m_Name: damage
+  m_Name: expPerSecond
   m_EditorClassIdentifier: 
-  _imageActive: {fileID: 1381141789245080190, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
-  _imageInactive: {fileID: -2863861358245869155, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
-  _id: 4
+  _imageActive: {fileID: -5987545944329257516, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
+  _imageInactive: {fileID: 7868614714891284549, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
+  _id: 19
   _maxLevel: 10
   _discription: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
-    \u0443\u0440\u043E\u043D \u043F\u043E \u0431\u043B\u043E\u043A\u0430\u043C"
+    \u043F\u043E\u0441\u0438\u0432\u043D\u043E\u0435 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0435
+    \u043E\u043F\u044B\u0442\u0430"

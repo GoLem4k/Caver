@@ -4,23 +4,28 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
+[RequireComponent(typeof(CustomButton))]
 public class SkillCard : PausedBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public UpgradeData data;
     public GameObject discWindow;
     public int currentLevel;
-    public bool dependence;
-    public SkillCard[] dependences;
-    public GameObject[] wires;
+    public int dependencies;
+    public SkillCard[] dependentsSkills;
+    public SkillLocker[] dependentsLockers;
+    public SwitchableImage[] wires;
+
+    public Image skillIcon;
     
-    public void Initialize()
+    public void Start()
     {
-        GetComponent<Image>().sprite = data.imageInactive;
+        skillIcon = GetComponent<Image>();
+        skillIcon.sprite = (dependencies == 0) ? data.imageActive : data.imageInactive;
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (PlayerDataManager.I.skillPoints > 0 && dependence == false)
+        if (PlayerDataManager.I.skillPoints > 0 && dependencies == 0 && currentLevel < data.maxLevel)
         {
             UpgradesManager.I.MakeUpgrade(data.id);
             currentLevel++;
@@ -30,14 +35,29 @@ public class SkillCard : PausedBehaviour, IPointerClickHandler, IPointerEnterHan
                 discWindow.GetComponent<TextMeshProUGUI>().text = GetDiscription();
                 discWindow.SetActive(true);
             }
-        }
-
-        if (currentLevel == 1)
-        {
-            SetACtiveSprite();
-            foreach (var skill in dependences)
+            if (currentLevel == 1)
             {
-                skill.dependence = false;
+                GetComponentInParent<SwitchableImage>().SetActiveSprite();
+                foreach (var skill in dependentsSkills)
+                {
+                    skill.dependencies--;
+                    skill.skillIcon.sprite = (skill.dependencies == 0) ? skill.data.imageActive : skill.data.imageInactive;
+                }
+
+                foreach (var locker in dependentsLockers)
+                {
+                    locker.RemoveDependence();
+                }
+
+                foreach (var wire in wires)
+                {
+                    wire.GetComponent<SwitchableImage>().SetActiveSprite();
+                }
+            }
+
+            if (currentLevel == data.maxLevel)
+            {
+                GetComponentInParent<SwitchableImage>().SetSuperSprite();
             }
         }
     }
@@ -68,6 +88,6 @@ public class SkillCard : PausedBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void SetACtiveSprite()
     {
-        GetComponent<Image>().sprite = data.imageActive;
+        skillIcon.sprite = data.imageActive;
     }
 }

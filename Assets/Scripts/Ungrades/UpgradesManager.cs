@@ -42,7 +42,7 @@ public class UpgradesManager : PausedBehaviour
                 RunData.I.critChance += 0.05f;
                 break;
             case 3:
-                RunData.I.reboundDamage += 5f;
+                RunData.I.damage += 5f;
                 break;
             case 4:
                 RunData.I.reboundScale += 0.8f;
@@ -64,9 +64,6 @@ public class UpgradesManager : PausedBehaviour
                 break;
             case 102:
                 RunData.I.canCrit = true;
-                break;
-            case 201:
-                RunData.I.canPlaceBlock = true;
                 break;
             case 202:
                 RunData.I.globalExpMultiplier += 0.01f;

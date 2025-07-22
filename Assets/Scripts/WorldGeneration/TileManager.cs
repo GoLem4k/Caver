@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,12 +11,14 @@ public class TileManager : PausedBehaviour
     
     [Header("Прочность блоков")] [SerializeField]
     public static Tilemap BlocksTilemap;
-
     public static Tilemap CracksTilemap;
+    public static Tilemap SelectorTilemap;
+    
     public static Tile[] CrackTiles;
 
     [SerializeField] private Tilemap blocksTilemap;
     [SerializeField] private Tilemap cracksTilemap;
+    [SerializeField] private Tilemap selectorTilemap;
 
     [SerializeField] private Tile[] crackTiles;
 
@@ -24,6 +27,10 @@ public class TileManager : PausedBehaviour
     [SerializeField] private BlockTile expstoneTile;
     [SerializeField] private BlockTile endstoneTile;
     [SerializeField] private BlockTile debugSmartTile;
+
+    private Vector3Int previousSelectorPos;
+    private Vector3Int currentSelectorPos;
+    [SerializeField] private Tile selectorTile;
 
     private List<Vector3Int> toDestroy = new List<Vector3Int>();
     
@@ -34,9 +41,15 @@ public class TileManager : PausedBehaviour
         else Destroy(gameObject);
         BlocksTilemap = blocksTilemap;
         CracksTilemap = cracksTilemap;
+        SelectorTilemap = selectorTilemap;
         CrackTiles = crackTiles;
     }
 
+    public Tilemap GetBlockTilemap()
+    {
+        return BlocksTilemap;
+    }
+    
     public void SetCell(Vector3Int pos, BlockType type)
     {
         BlockTile blockTile;
@@ -136,6 +149,40 @@ public class TileManager : PausedBehaviour
             return tile == null;
         }
         return tile is BlockTile blockTile && blockTile.type == type;
+    }
+
+    public bool IsTileByWorldPos(Vector3 pos)
+    {
+        Vector3Int newPos = GetBlockTilemap().WorldToCell(pos);
+        if (GetBlockTilemap().HasTile(newPos))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SetSelectorTileOnPos(Vector3Int pos)
+    {
+        if (pos != currentSelectorPos)
+        {
+            previousSelectorPos = currentSelectorPos;
+            currentSelectorPos = pos;
+            selectorTilemap.SetTile(pos, selectorTile);
+            selectorTilemap.SetTile(previousSelectorPos, null);            
+        }
+    }
+
+    public void ResetSelector()
+    {
+        selectorTilemap.SetTile(currentSelectorPos, null);
+    }
+
+    public void DamageSelectTile()
+    {
+        if (selectorTilemap.HasTile(currentSelectorPos))
+        {
+            damageBlock(currentSelectorPos, RunData.I.damage);
+        }
     }
 }
 

@@ -42,6 +42,8 @@ public class VectorMovementController : PausedBehaviour
     private LineRenderer lineInput;
     private LineRenderer lineFinal;
 
+    private float leapCooldown = 0f;
+
     public TileManager TileManager;
     
     public void Initialize() {
@@ -59,6 +61,7 @@ public class VectorMovementController : PausedBehaviour
     
     public override void GameUpdate()
     {
+        leapCooldown = Mathf.Clamp(leapCooldown - Time.deltaTime, 0f, RunData.I.leapCooldown);
         // Получаем вход игрока
         inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
@@ -91,12 +94,11 @@ public class VectorMovementController : PausedBehaviour
         forceMovement = externalForces.normalized * forceSpeed;
         finalMovement = inputMovement + forceMovement;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && leapCooldown <= 0)
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0f; // Обнуляем Z для 2D
-            Vector2 direction = (mouseWorldPos - transform.position);
-
+            Vector2 direction = inputMovement;
+            leapCooldown += RunData.I.leapCooldown;
+            
             forceSpeed += RunData.I.reboundScale;
             AddExternalForce(direction.normalized);
         }
@@ -163,7 +165,7 @@ public class VectorMovementController : PausedBehaviour
             Vector3 contactPoint = contact.point - contact.normal * 0.1f;
             Vector3Int tilePos = TileManager.BlocksTilemap.WorldToCell(contactPoint);
             //Debug.Log($"contact.point: {contact.point}, adjusted: {contactPoint}, tilePos: {tilePos}");
-            TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.reboundDamage * 2f : RunData.I.reboundDamage);
+            TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.damage * 2f : RunData.I.damage);
 
         }
     }

@@ -33,6 +33,7 @@ public class UpgradesManager : PausedBehaviour
     
     public void MakeUpgrade(int id)
     {
+        PlayerDataManager.I.RemoveSkillPoint();
         switch (id)
         {
             case 1:

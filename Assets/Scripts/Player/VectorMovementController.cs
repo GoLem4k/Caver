@@ -7,6 +7,7 @@ public class VectorMovementController : PausedBehaviour
 {
     public float moveSpeed = 0f;
 
+    public static Transform playerTransform;
     //public float accelerationSpeed = 2f;
     //public float breakingSpeed = 5f;
     //public float rotationSpeed = 0.1f;
@@ -61,6 +62,7 @@ public class VectorMovementController : PausedBehaviour
     
     public override void GameUpdate()
     {
+        playerTransform = transform;
         leapCooldown = Mathf.Clamp(leapCooldown - Time.deltaTime, 0f, RunData.I.leapCooldown);
         // Получаем вход игрока
         inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

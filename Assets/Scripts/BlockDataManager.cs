@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class BlockDataManager : MonoBehaviour
 {
+    public static BlockDataManager I { get; private set; }
+    
     public static List<BlockData> BLOCKDATALIST = new List<BlockData>();
     
     public static void addBlock(BlockData block) { BLOCKDATALIST.Add(block); }
     public static void removeBlock(BlockData block) { BLOCKDATALIST.Remove(block); }
     public static void removeBlockAtPos(Vector3Int pos) { BLOCKDATALIST.RemoveAll(b => b.position == pos); }
+
+    [SerializeField] private GameObject _expOrb;
+
+    private void Start()
+    {
+        if (I == null) I = this;
+    }
 
 
     public override string ToString()
@@ -39,7 +48,9 @@ public class BlockDataManager : MonoBehaviour
         return $"Dirt: {dirtCount}, Stone: {stoneCount}, Endstone: {endstoneCount}, Expstone: {expstoneCount}";
     }
 
-    private void Update(){
-        if (Input.GetKeyDown(KeyCode.G)) Debug.Log(this);
+    public void SpawnExpOrb(Vector3Int pos)
+    {
+        GameObject orb = Instantiate(_expOrb);
+        orb.transform.position = pos+ new Vector3(0.5f,0.5f, 0);
     }
 }

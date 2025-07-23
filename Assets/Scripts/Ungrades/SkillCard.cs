@@ -29,7 +29,6 @@ public class SkillCard : PausedBehaviour, IPointerClickHandler, IPointerEnterHan
         {
             UpgradesManager.I.MakeUpgrade(data.id);
             currentLevel++;
-            PlayerDataManager.I.skillPoints--;
             if (discWindow != null)
             {
                 discWindow.GetComponent<TextMeshProUGUI>().text = GetDiscription();

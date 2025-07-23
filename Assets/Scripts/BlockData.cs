@@ -60,10 +60,12 @@ public class BlockData
 
     public void Destroy()
     {
-        PlayerDataManager.I._exp += RunData.I.blockBreakExp * RunData.I.globalExpMultiplier;
+        //PlayerDataManager.I._exp += RunData.I.blockBreakExp * RunData.I.globalExpMultiplier;
+        
         if (_isBeingDestroyed) return;
         _isBeingDestroyed = true;
         
+        BlockDataManager.I.SpawnExpOrb(_position);
         
 
         if (this.type == BlockType.Expstone)

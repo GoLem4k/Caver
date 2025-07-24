@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class WorldGenerator : MonoBehaviour
     public static int WORLDRADIUS = 256;
     public static Vector3Int SPAWNPOINT = new Vector3Int(0,0,0);
     //public float noiseScale = 0.1f;
-    public static int SEED = 12345;
     public float stoneThreshold = 0.3f;
     
     [Header("Шум земли")]
@@ -37,6 +37,17 @@ public class WorldGenerator : MonoBehaviour
     public float depositChance = 0.01f;
 
     public float[] multipleOreChance = { 1f, 0.9f, 0.5f, 0.2f, 0.05f };
+
+    [Header("Настройки генерации чаш")]
+    [SerializeField] private GameObject _fireBowl;
+    //[SerializeField] private float fireBowlChance = 0.01f;
+
+    [Header("4 Алтаря")]
+    [SerializeField] private GameObject _altarUpLeft;
+    [SerializeField] private GameObject _altarUpRight;
+    [SerializeField] private GameObject _altarDownRight;
+    [SerializeField] private GameObject _altarDownLeft;
+    
     private System.Random rng;
     
     Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
@@ -65,15 +76,18 @@ public class WorldGenerator : MonoBehaviour
     public void Initialize()
     {
         WORLDRADIUS = worldRadius;
-        rng = new System.Random(SEED);
+        rng = new System.Random(RunData.I.SEED);
 
         SPAWNPOINT = GetRandomPointOnCircle(new Vector3Int(0, 0, 0), spawnAreaInRange);
-        
+
+        gBgCircleArea(new Vector3Int(0,0,0), WORLDRADIUS*2);
         gBlockCircleArea(new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Stone); //Генерация основы мира из камня
         gBlockRingArea(new Vector3Int(0,0,0), WORLDRADIUS+spaceBetweenWorldAndEdge, WORLDRADIUS+spaceBetweenWorldAndEdge+worldEdgeSize, BlockType.Endstone); //Генерация границы мира
         gBlockCircleArea(SPAWNPOINT, spawnAreaRadius, BlockType.None); //Генерация спавн зоны
-        gNoiseBlocksInRadius(SEED, airNoiseScale, airMinThreshold, airMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.None, BlockType.Stone); //Генерация пещер
-        gNoiseBlocksInRadius(SEED, dirtNoiseScale, dirtMinThreshold, dirtMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Dirt, BlockType.Stone); //Генерация земли
+        gNoiseBlocksInRadius(RunData.I.SEED, airNoiseScale, airMinThreshold, airMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.None, BlockType.Stone); //Генерация пещер
+        gNoiseBlocksInRadius(RunData.I.SEED, dirtNoiseScale, dirtMinThreshold, dirtMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Dirt, BlockType.Stone); //Генерация земли
+        gFireBowlOnePerChunk(new Vector3Int(0,0,0), WORLDRADIUS, RunData.I.fireBowlChank); //Генерация чаш с онём
+        FindAltarPlacesInFourQuadrants(new Vector2(0,0), WORLDRADIUS);
         //GenerateOres(); //Генерация медной руды
         for (int i = 0; i < 25; i++)
         {
@@ -104,6 +118,102 @@ public class WorldGenerator : MonoBehaviour
                 {
                     Vector3Int pos = new Vector3Int(center.x + x, center.y + y, 0);
                     tileManager.SetCell(pos, type);
+                }
+            }
+        }
+    }
+    
+    private void gFireBowlOnePerChunk(Vector3Int center, int radius, int chunkSize)
+    {
+        int minX = center.x - radius;
+        int maxX = center.x + radius;
+        int minY = center.y - radius;
+        int maxY = center.y + radius;
+
+        for (int cx = minX; cx < maxX; cx += chunkSize)
+        {
+            for (int cy = minY; cy < maxY; cy += chunkSize)
+            {
+                // Выбрать случайную точку в чанке
+                int localX = rng.Next(0, chunkSize);
+                int localY = rng.Next(0, chunkSize);
+                Vector3Int tilePos = new Vector3Int(cx + localX, cy + localY, 0);
+
+                float distSqr = (tilePos.x - center.x) * (tilePos.x - center.x) + (tilePos.y - center.y) * (tilePos.y - center.y);
+                if (distSqr > radius * radius) continue;
+
+                if (!TileManager.IsBlockOnPos(tilePos, BlockType.None)) continue;
+
+                Vector3 worldPos = new Vector3(tilePos.x + 0.5f, tilePos.y + 0.5f, 0);
+                GameObject fireBowl = Instantiate(_fireBowl);
+                fireBowl.transform.position = worldPos;
+            }
+        }
+    }
+    
+    void FindAltarPlacesInFourQuadrants(Vector2 center, float radius)
+    {
+        float minDist = radius * 0.7f;
+
+        for (int i = 0; i < 4; i++)
+        {
+            float angle = (float)(rng.NextDouble() * (Mathf.PI / 2f)); // от 0 до π/2
+            float dist = (float)(rng.NextDouble() * (radius - minDist) + minDist); // от minDist до radius
+            float x = Mathf.Cos(angle) * dist;
+            float y = Mathf.Sin(angle) * dist;
+
+            switch (i)
+            {
+                case 0: x = -Mathf.Abs(x); y =  Mathf.Abs(y); break; // -x +y
+                case 1: x =  Mathf.Abs(x); y =  Mathf.Abs(y); break; // +x +y
+                case 2: x =  Mathf.Abs(x); y = -Mathf.Abs(y); break; // +x -y
+                case 3: x = -Mathf.Abs(x); y = -Mathf.Abs(y); break; // -x -y
+            }
+
+            Vector2 pos = center + new Vector2(x, y);
+            Vector3Int intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), 0);
+            SpawnAltar(intPos, i);
+        }
+    }
+
+
+    private void SpawnAltar(Vector3Int pos, int id)
+    {
+        GameObject altar;
+        switch (id)
+        {
+            case 0:
+                altar = _altarUpLeft;
+                break;
+            case 1:
+                altar = _altarUpRight;
+                break;
+            case 2:
+                altar = _altarDownRight;
+                break;
+            case 3:
+                altar = _altarDownLeft;
+                break;
+            default:
+                Debug.Log("Неизвестный id алтаря");
+                return;
+                break;
+        }
+        Vector3 worldPos = new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0);
+        GameObject newAltar = Instantiate(altar);
+        newAltar.transform.position = worldPos;
+    }
+    
+    private void gBgCircleArea(Vector3Int center, int radius)
+    {
+        float radiusSqr = radius * radius;
+        for (int x = -radius; x < radius; x++) {
+            for (int y = -radius; y < radius; y++) {
+                float distSqr = x * x + y * y;
+                if (distSqr <= radiusSqr)
+                {
+                    Vector3Int pos = new Vector3Int(center.x + x, center.y + y, 0);
+                    tileManager.SetBgCell(pos);
                 }
             }
         }
@@ -157,6 +267,25 @@ public class WorldGenerator : MonoBehaviour
         }
     }
     
+    /*private void gFireBownlWithChanceInCircleArea(Vector3Int center, int radius, float chance)
+    {
+        float radiusSqr = radius * radius;
+        for (int x = -radius; x < radius; x++) {
+            for (int y = -radius; y < radius; y++) {
+                float distSqr = x * x + y * y;
+                if (distSqr <= radiusSqr)
+                {
+                    if (TileManager.IsBlockOnPos(new Vector3Int(center.x + x, center.y + y, 0), BlockType.None) && rng.NextDouble() < chance)
+                    {
+                        Vector3 pos = new Vector3(center.x + x + 0.5f, center.y + y + 0.5f, 0);
+                        GameObject fireBowl = Instantiate(_fireBowl);
+                        fireBowl.transform.position = pos;
+                    }
+
+                }
+            }
+        }
+    }*/
 
     /*private bool isPlaceForOre(Vector3Int pos, int neighborsCount, HashSet<Vector3Int> currentDeposit = null)
     {

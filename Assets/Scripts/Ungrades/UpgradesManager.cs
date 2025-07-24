@@ -13,7 +13,7 @@ public class UpgradesManager : PausedBehaviour
     public void Initialize()
     {
         if (I == null) I = this;
-        rng = new System.Random(WorldGenerator.SEED);
+        rng = new System.Random(RunData.I.SEED);
     }
 
     /*

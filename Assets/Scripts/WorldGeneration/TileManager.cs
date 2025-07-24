@@ -19,6 +19,7 @@ public class TileManager : PausedBehaviour
     [SerializeField] private Tilemap blocksTilemap;
     [SerializeField] private Tilemap cracksTilemap;
     [SerializeField] private Tilemap selectorTilemap;
+    [SerializeField] private Tilemap BackgroundTilemap;
 
     [SerializeField] private Tile[] crackTiles;
 
@@ -27,6 +28,8 @@ public class TileManager : PausedBehaviour
     [SerializeField] private BlockTile expstoneTile;
     [SerializeField] private BlockTile endstoneTile;
     [SerializeField] private BlockTile debugSmartTile;
+    
+    [SerializeField] private RuleTile bgRuleTile;
 
     private Vector3Int previousSelectorPos;
     private Vector3Int currentSelectorPos;
@@ -80,6 +83,11 @@ public class TileManager : PausedBehaviour
         BlockDataManager.removeBlockAtPos(pos);
         new BlockData(type, pos);
         if (blockTile != null) blocksTilemap.SetTile(pos, blockTile);
+    }
+
+    public void SetBgCell(Vector3Int pos)
+    {
+        BackgroundTilemap.SetTile(pos, bgRuleTile);
     }
 
     public static void damageBlock(Vector3Int pos, float damage)

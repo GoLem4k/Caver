@@ -20,6 +20,8 @@ public class PlayerDataManager : PausedBehaviour
     
     [SerializeField] private GameObject essenceCounterUI;
     private TextMeshProUGUI _textMeshProUGUI2;
+
+
     public float _exp;
     
     public void Initialize()

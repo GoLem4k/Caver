@@ -35,13 +35,19 @@ public class MouseBreaker : MonoBehaviour
         {
             if (hit.collider != null && hit.collider != selfCollider)
             {
-                if (TileManager.I.IsTileByWorldPos(hit.point + direction * 0.2f))
+                // Проверка тега
+                if (hit.collider.CompareTag("Wall")) // Заменить "Tile" на нужный тег
                 {
-                    TileManager.I.SetSelectorTileOnPos(TileManager.SelectorTilemap.WorldToCell(hit.point + direction * 0.2f));
+                    Vector3 tilePoint = hit.point + direction * 0.2f;
+
+                    if (TileManager.I.IsTileByWorldPos(tilePoint))
+                    {
+                        TileManager.I.SetSelectorTileOnPos(TileManager.SelectorTilemap.WorldToCell(tilePoint));
+                    }
+
+                    Debug.DrawRay(origin, direction * hit.distance, Color.green);
+                    return;
                 }
-                //Debug.Log($"Hit: {hit.collider.name}");
-                Debug.DrawRay(origin, direction * hit.distance, Color.green);
-                return;
             }
         }
         if (hits.Length == 1) TileManager.I.ResetSelector();

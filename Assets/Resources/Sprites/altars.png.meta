@@ -1,25 +1,13 @@
 fileFormatVersion: 2
-guid: 6695891f8907892468a01e1f8d9907a6
+guid: 0408b2638a9fe114086ed46d929f6a43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2978653956524333172
-    second: icons_0
+      213: 7125159448896179189
+    second: altars_0
   - first:
-      213: -299690340437171572
-    second: icons_1
-  - first:
-      213: -1290855366162983238
-    second: icons_2
-  - first:
-      213: -2248273014285675650
-    second: icons_3
-  - first:
-      213: -2696506250795634678
-    second: icons_4
-  - first:
-      213: 6621252853494989987
-    second: icons_5
+      213: -670930033658401864
+    second: altars_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,11 +103,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icons_0
+      name: altars_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -130,18 +118,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c872e841202b9a6d0800000000000000
-      internalID: -2978653956524333172
+      spriteID: 5fb897f94c6a1e260800000000000000
+      internalID: 7125159448896179189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_1
+      name: altars_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -152,18 +140,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c8260a3293947dbf0800000000000000
-      internalID: -299690340437171572
+      spriteID: 8bb66aa60b060b6f0800000000000000
+      internalID: -670930033658401864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_2
+      name: altars_2
       rect:
         serializedVersion: 2
         x: 32
-        y: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -172,20 +160,20 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ab6d27b32e5f51ee0800000000000000
-      internalID: -1290855366162983238
+      spriteID: 350096367a32100469caffed0f8184ad
+      internalID: -131212418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_3
+      name: altars_3
       rect:
         serializedVersion: 2
         x: 48
-        y: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -194,20 +182,20 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e73d769fa978cc0e0800000000000000
-      internalID: -2248273014285675650
+      spriteID: cb56f98c49d63dc4783217342badeaec
+      internalID: 299710337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_4
+      name: altars_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -216,20 +204,20 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a00b4b20ad5149ad0800000000000000
-      internalID: -2696506250795634678
+      spriteID: e1bee3dcdc37c8a439a119e255c4f3ae
+      internalID: -969807495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_5
+      name: altars_5
       rect:
         serializedVersion: 2
         x: 16
-        y: 32
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -238,10 +226,54 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3a44c9ca36a63eb50800000000000000
-      internalID: 6621252853494989987
+      spriteID: 8cfa1803be9f0dc4f9697912b2b099c4
+      internalID: -768855117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: altars_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2bc2c9c14869c5478a99938365b52a7
+      internalID: -1925312929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: altars_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e406be696486e5a4f83b585b928887d0
+      internalID: 482300890
       vertices: []
       indices: 
       edges: []
@@ -250,7 +282,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d720c1d8f5ebbea40a6aada692f7a5fb
+    spriteID: b92e63ca8afe0514db44bc4314ed936c
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +292,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icons_0: -2978653956524333172
-      icons_1: -299690340437171572
-      icons_2: -1290855366162983238
-      icons_3: -2248273014285675650
-      icons_4: -2696506250795634678
-      icons_5: 6621252853494989987
+      altars_0: 7125159448896179189
+      altars_1: -670930033658401864
+      altars_2: -131212418
+      altars_3: 299710337
+      altars_4: -969807495
+      altars_5: -768855117
+      altars_6: -1925312929
+      altars_7: 482300890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

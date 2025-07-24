@@ -5,6 +5,9 @@ public class RunData : MonoBehaviour
 {
     public static RunData I { get; private set; }
 
+    [Header("Сид забега")] public int SEED;
+    [Header("Размер чанка где может заспавнится чаша")] public int fireBowlChank = 16;
+    
     [Header("Урон при отскоке и ударе")] public float damage = 30f;
     [Header("КД удара")] public float damageCooldown = 1f;
     [Header("Скорость игрока")] public float movementSpeed = 3f;

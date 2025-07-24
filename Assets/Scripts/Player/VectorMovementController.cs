@@ -48,7 +48,7 @@ public class VectorMovementController : PausedBehaviour
     public TileManager TileManager;
     
     public void Initialize() {
-        rng = new System.Random(WorldGenerator.SEED);
+        rng = new System.Random(RunData.I.SEED);
         rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<PlayerAnimationController>();
 
@@ -127,21 +127,14 @@ public class VectorMovementController : PausedBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Wall"))
-        {
             canSpeedUp = false;
             if (forceSpeed > 0f)
                 TryReflect(collision);
-        }
-        else
-        {
-            canSpeedUp = true;
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        canSpeedUp = collision.collider.CompareTag("Wall");
+        canSpeedUp = true;
     }
 
     private void DamageBlock(Vector3Int pos)
@@ -167,7 +160,10 @@ public class VectorMovementController : PausedBehaviour
             Vector3 contactPoint = contact.point - contact.normal * 0.1f;
             Vector3Int tilePos = TileManager.BlocksTilemap.WorldToCell(contactPoint);
             //Debug.Log($"contact.point: {contact.point}, adjusted: {contactPoint}, tilePos: {tilePos}");
-            TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.damage * 2f : RunData.I.damage);
+            if (collision.collider.CompareTag("Wall"))
+            {
+                TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.damage * 2f : RunData.I.damage);
+            }
 
         }
     }

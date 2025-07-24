@@ -1,25 +1,10 @@
 fileFormatVersion: 2
-guid: 6695891f8907892468a01e1f8d9907a6
+guid: d4825a909aff58649b25efdda2557358
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2978653956524333172
-    second: icons_0
-  - first:
-      213: -299690340437171572
-    second: icons_1
-  - first:
-      213: -1290855366162983238
-    second: icons_2
-  - first:
-      213: -2248273014285675650
-    second: icons_3
-  - first:
-      213: -2696506250795634678
-    second: icons_4
-  - first:
-      213: 6621252853494989987
-    second: icons_5
+      213: 7077877577408827300
+    second: tileset_gray_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,7 +100,139 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icons_0
+      name: bgTiles_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7db1e88b8477f41a1276ba09c30316
+      internalID: -23741923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e997bf577b1c5724b87dc6af97301b04
+      internalID: -144758777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d01817be42afd74cb60bfdbff2e933f
+      internalID: -886019526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72495d9bebb4a1042a9282eddf4d0ee1
+      internalID: 328556474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0120f55abfde1e845802028e7ce62c14
+      internalID: 349248741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c262e79858605c4a9bc56cc4537aece
+      internalID: 693997383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgTiles_6
       rect:
         serializedVersion: 2
         x: 0
@@ -128,16 +245,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c872e841202b9a6d0800000000000000
-      internalID: -2978653956524333172
+      spriteID: e79719ac58bda404bac47c0c2a17bab1
+      internalID: 26114078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_1
+      name: bgTiles_7
       rect:
         serializedVersion: 2
         x: 16
@@ -150,16 +267,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c8260a3293947dbf0800000000000000
-      internalID: -299690340437171572
+      spriteID: ba72709632f9ed142a58f3abe97d103f
+      internalID: 1813877688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_2
+      name: bgTiles_8
       rect:
         serializedVersion: 2
         x: 32
@@ -172,16 +289,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ab6d27b32e5f51ee0800000000000000
-      internalID: -1290855366162983238
+      spriteID: e59e2bceab44b0f4e871751d4d166533
+      internalID: 1236456462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_3
+      name: bgTiles_9
       rect:
         serializedVersion: 2
         x: 48
@@ -194,54 +311,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e73d769fa978cc0e0800000000000000
-      internalID: -2248273014285675650
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: icons_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a00b4b20ad5149ad0800000000000000
-      internalID: -2696506250795634678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: icons_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3a44c9ca36a63eb50800000000000000
-      internalID: 6621252853494989987
+      spriteID: 0c2b156bcdfee27448ef2743b212a8f4
+      internalID: -778805789
       vertices: []
       indices: 
       edges: []
@@ -250,7 +323,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d720c1d8f5ebbea40a6aada692f7a5fb
+    spriteID: fef46ecac57625f44a5575dd01d75079
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +333,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icons_0: -2978653956524333172
-      icons_1: -299690340437171572
-      icons_2: -1290855366162983238
-      icons_3: -2248273014285675650
-      icons_4: -2696506250795634678
-      icons_5: 6621252853494989987
+      bgTiles_0: -23741923
+      bgTiles_1: -144758777
+      bgTiles_2: -886019526
+      bgTiles_3: 328556474
+      bgTiles_4: 349248741
+      bgTiles_5: 693997383
+      bgTiles_6: 26114078
+      bgTiles_7: 1813877688
+      bgTiles_8: 1236456462
+      bgTiles_9: -778805789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

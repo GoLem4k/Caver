@@ -37,6 +37,15 @@ public class TileManager : PausedBehaviour
 
     private List<Vector3Int> toDestroy = new List<Vector3Int>();
     
+    public Tilemap physicalTilemap;   // Тайлмап-копия
+    public Tilemap bgDynemicsTilemap;   // Тайлмап-копия
+    public Tilemap displayTilemap;   // Тайлмап-копия
+    public Transform player;        // Игрок
+    Dictionary<Tilemap, HashSet<Vector3Int>> previousPositionsDict = new();
+
+    private BoundsInt _lastBounds;
+    private TileBase[] _lastTiles;
+    
 
     public void Initialize()
     {
@@ -60,7 +69,7 @@ public class TileManager : PausedBehaviour
         {
             case BlockType.None:
                 ClearCell(pos);
-                BlockDataManager.removeBlockAtPos(pos);
+                BlockDataManager.RemoveBlockAtPos(pos);
                 return;
             case BlockType.Dirt:
                 blockTile = dirtTile;
@@ -80,7 +89,7 @@ public class TileManager : PausedBehaviour
                 return;
         }
         
-        BlockDataManager.removeBlockAtPos(pos);
+        BlockDataManager.RemoveBlockAtPos(pos);
         new BlockData(type, pos);
         if (blockTile != null) blocksTilemap.SetTile(pos, blockTile);
     }
@@ -90,10 +99,9 @@ public class TileManager : PausedBehaviour
         BackgroundTilemap.SetTile(pos, bgRuleTile);
     }
 
-    public static void damageBlock(Vector3Int pos, float damage)
+    public static void DamageBlock(Vector3Int pos, float damage)
     {
-        BlockData t = BlockDataManager.BLOCKDATALIST.Find(b => b.position == pos);
-        if (t == null)
+        if (!BlockDataManager.blockDataDict.TryGetValue(pos, out BlockData t))
         {
             Debug.LogWarning($"[BlockDataManager] Нет блока по координате {pos}");
             return;
@@ -121,7 +129,7 @@ public class TileManager : PausedBehaviour
                 {
                     toDestroy.Add(neighborPos);
                     yield return new WaitForSeconds(delay);
-                    damageBlock(neighborPos, damage);
+                    DamageBlock(neighborPos, damage);
                     toDestroy.Remove(neighborPos);
                 }
             }
@@ -189,9 +197,53 @@ public class TileManager : PausedBehaviour
     {
         if (selectorTilemap.HasTile(currentSelectorPos))
         {
-            damageBlock(currentSelectorPos, RunData.I.damage);
+            DamageBlock(currentSelectorPos, RunData.I.damage);
         }
     }
+
+
+
+    public override void GameUpdate()
+    {
+        SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 3);
+        SyncTilemapAroundPlayer(blocksTilemap, displayTilemap, 12);
+        SyncTilemapAroundPlayer(BackgroundTilemap, bgDynemicsTilemap, 12);
+    }
+
+    void SyncTilemapAroundPlayer(Tilemap sourceTilemap, Tilemap targetTilemap, int copyRadius)
+    {
+        Vector3Int playerCell = sourceTilemap.WorldToCell(player.position);
+        BoundsInt bounds = new BoundsInt(
+            playerCell.x - copyRadius, playerCell.y - copyRadius, 0,
+            copyRadius * 2 + 1, copyRadius * 2 + 1, 1);
+
+        // Инициализация кэша, если его ещё нет
+        if (!previousPositionsDict.ContainsKey(targetTilemap))
+            previousPositionsDict[targetTilemap] = new HashSet<Vector3Int>();
+
+        var prevPositions = previousPositionsDict[targetTilemap];
+        var newPositions = new HashSet<Vector3Int>();
+
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            TileBase sourceTile = sourceTilemap.GetTile(pos);
+            TileBase targetTile = targetTilemap.GetTile(pos);
+
+            if (sourceTile != targetTile)
+                targetTilemap.SetTile(pos, sourceTile);
+
+            newPositions.Add(pos);
+        }
+
+        foreach (var oldPos in prevPositions)
+        {
+            if (!newPositions.Contains(oldPos))
+                targetTilemap.SetTile(oldPos, null);
+        }
+
+        previousPositionsDict[targetTilemap] = newPositions;
+    }
+
 }
 
 

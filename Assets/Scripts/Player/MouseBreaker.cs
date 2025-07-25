@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MouseBreaker : MonoBehaviour
+public class MouseBreaker : PausedBehaviour
 {
     public float rayLength = 100f;
     public LayerMask layerMask = ~0;
@@ -13,7 +13,7 @@ public class MouseBreaker : MonoBehaviour
         selfCollider = GetComponent<Collider2D>();
     }
 
-    void Update()
+    public override void GameUpdate()
     {
         damageCooldown = Mathf.Clamp(damageCooldown - Time.deltaTime, 0, RunData.I.damageCooldown);
         Vector3 mouseScreenPos = Input.mousePosition;

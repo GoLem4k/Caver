@@ -7,11 +7,23 @@ public class BlockDataManager : MonoBehaviour
 {
     public static BlockDataManager I { get; private set; }
     
-    public static List<BlockData> BLOCKDATALIST = new List<BlockData>();
-    
-    public static void addBlock(BlockData block) { BLOCKDATALIST.Add(block); }
-    public static void removeBlock(BlockData block) { BLOCKDATALIST.Remove(block); }
-    public static void removeBlockAtPos(Vector3Int pos) { BLOCKDATALIST.RemoveAll(b => b.position == pos); }
+    public static Dictionary<Vector3Int, BlockData> blockDataDict = new Dictionary<Vector3Int, BlockData>();
+
+    public static void AddBlock(BlockData block)
+    {
+        blockDataDict[block.position] = block;
+    }
+
+    public static void RemoveBlock(BlockData block)
+    {
+        blockDataDict.Remove(block.position);
+    }
+
+    public static void RemoveBlockAtPos(Vector3Int pos)
+    {
+        blockDataDict.Remove(pos);
+    }
+
 
     [SerializeField] private GameObject _expOrb;
 
@@ -27,9 +39,9 @@ public class BlockDataManager : MonoBehaviour
         int stoneCount = 0;
         int endstoneCount = 0;
         int expstoneCount = 0;
-        foreach (var VARIABLE in BLOCKDATALIST)
+        foreach (var VARIABLE in blockDataDict)
         {
-            switch (VARIABLE.type)
+            switch (VARIABLE.Value.type)
             {
                 case BlockType.Dirt:
                     dirtCount++;

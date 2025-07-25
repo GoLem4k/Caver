@@ -33,7 +33,7 @@ public class BlockData
                 break;
         }
         _maxDurability = _durability;
-        BlockDataManager.addBlock(this);
+        BlockDataManager.AddBlock(this);
     }
     
     public BlockType type => _type;
@@ -74,6 +74,6 @@ public class BlockData
         }
 
         TileManager.ClearCell(_position);
-        BlockDataManager.removeBlock(this);
+        BlockDataManager.RemoveBlock(this);
     }
 }

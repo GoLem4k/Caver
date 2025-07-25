@@ -87,7 +87,7 @@ public class WorldGenerator : MonoBehaviour
         gNoiseBlocksInRadius(RunData.I.SEED, airNoiseScale, airMinThreshold, airMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.None, BlockType.Stone); //Генерация пещер
         gNoiseBlocksInRadius(RunData.I.SEED, dirtNoiseScale, dirtMinThreshold, dirtMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Dirt, BlockType.Stone); //Генерация земли
         gFireBowlOnePerChunk(new Vector3Int(0,0,0), WORLDRADIUS, RunData.I.fireBowlChank); //Генерация чаш с онём
-        FindAltarPlacesInFourQuadrants(new Vector2(0,0), WORLDRADIUS);
+        FindAltarPlacesInFourQuadrants(new Vector2(0,0), WORLDRADIUS, WORLDRADIUS * 0.25f);
         //GenerateOres(); //Генерация медной руды
         for (int i = 0; i < 25; i++)
         {
@@ -151,16 +151,13 @@ public class WorldGenerator : MonoBehaviour
         }
     }
     
-    void FindAltarPlacesInFourQuadrants(Vector2 center, float radius)
+    void FindAltarPlacesInFourQuadrants(Vector2 center, float radius, float minDist)
     {
-        float minDist = radius * 0.7f;
 
         for (int i = 0; i < 4; i++)
         {
-            float angle = (float)(rng.NextDouble() * (Mathf.PI / 2f)); // от 0 до π/2
-            float dist = (float)(rng.NextDouble() * (radius - minDist) + minDist); // от minDist до radius
-            float x = Mathf.Cos(angle) * dist;
-            float y = Mathf.Sin(angle) * dist;
+            float x = (float)(rng.NextDouble() * (radius/1.5f - minDist) + minDist);
+            float y = (float)(rng.NextDouble() * (radius/1.5f - minDist) + minDist);
 
             switch (i)
             {
@@ -197,9 +194,13 @@ public class WorldGenerator : MonoBehaviour
             default:
                 Debug.Log("Неизвестный id алтаря");
                 return;
-                break;
         }
         Vector3 worldPos = new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0);
+        foreach (var offset in NEIGHBOURS8X)
+        {
+            TileManager.I.SetCell(pos + offset, BlockType.None);
+        }
+        TileManager.I.SetCell(pos, BlockType.None);
         GameObject newAltar = Instantiate(altar);
         newAltar.transform.position = worldPos;
     }

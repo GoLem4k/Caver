@@ -162,7 +162,7 @@ public class VectorMovementController : PausedBehaviour
             //Debug.Log($"contact.point: {contact.point}, adjusted: {contactPoint}, tilePos: {tilePos}");
             if (collision.collider.CompareTag("Wall"))
             {
-                TileManager.damageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.damage * 2f : RunData.I.damage);
+                TileManager.DamageBlock(tilePos, (rng.NextDouble() < RunData.I.critChance) ? RunData.I.damage * 2f : RunData.I.damage);
             }
 
         }

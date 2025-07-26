@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3157f6966e64b7a4d887544cfcdcc67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldRadius: 32
   spawnAreaInRange: 8
   spawnAreaRadius: 5
   spaceBetweenWorldAndEdge: 3
@@ -1703,7 +1702,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5c82275e8956641a218a6f8fdacd1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _GlobalRunData: {fileID: 11400000, guid: b224053649a541e418f525f3c2e6e0ca, type: 2}
   SEED: 765381
+  WorldRadius: 0
   fireBowlChank: 18
   damage: 30
   damageCooldown: 1

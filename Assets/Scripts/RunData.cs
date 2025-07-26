@@ -4,8 +4,10 @@ using UnityEngine;
 public class RunData : MonoBehaviour
 {
     public static RunData I { get; private set; }
-
+    [SerializeField] private GlobalRunData _GlobalRunData;
+    
     [Header("Сид забега")] public int SEED;
+    [Header("Размер мира")] public int WorldRadius;
     [Header("Размер чанка где может заспавнится чаша")] public int fireBowlChank = 16;
     
     [Header("Урон при отскоке и ударе")] public float damage = 30f;
@@ -26,5 +28,26 @@ public class RunData : MonoBehaviour
     public void Initialize()
     {
         if (I == null) I = this;
+        switch (_GlobalRunData.WorldSize)
+        {
+            case 1:
+                WorldRadius = 64;
+                fireBowlChank = 16;
+                break;
+            case 2:
+                WorldRadius = 96;
+                fireBowlChank = 20;
+                break;
+            case 3:
+                WorldRadius = 128;
+                fireBowlChank = 24;
+                break;
+            default:
+                WorldRadius = 96;
+                fireBowlChank = 20;
+                break;
+        }
+
+        SEED = _GlobalRunData.SEED;
     }
 }

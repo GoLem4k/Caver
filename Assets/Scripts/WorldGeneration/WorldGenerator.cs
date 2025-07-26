@@ -7,7 +7,6 @@ using Object = UnityEngine.Object;
 public class WorldGenerator : MonoBehaviour
 {
     [Header("Настройки генерации")]
-    public int worldRadius = 256;
     public int spawnAreaInRange = 32;
     public int spawnAreaRadius = 8;
     public int spaceBetweenWorldAndEdge = 4;
@@ -15,7 +14,7 @@ public class WorldGenerator : MonoBehaviour
 
     private Vector3Int spawnPoint;
     
-    public static int WORLDRADIUS = 256;
+    public static int WORLDRADIUS;
     public static Vector3Int SPAWNPOINT = new Vector3Int(0,0,0);
     //public float noiseScale = 0.1f;
     public float stoneThreshold = 0.3f;
@@ -75,7 +74,7 @@ public class WorldGenerator : MonoBehaviour
     
     public void Initialize()
     {
-        WORLDRADIUS = worldRadius;
+        WORLDRADIUS = RunData.I.WorldRadius;
         rng = new System.Random(RunData.I.SEED);
 
         SPAWNPOINT = GetRandomPointOnCircle(new Vector3Int(0, 0, 0), spawnAreaInRange);

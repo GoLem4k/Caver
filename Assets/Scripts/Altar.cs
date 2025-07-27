@@ -10,7 +10,7 @@ public class Altar : PausedBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     
     
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         if (playerInZone && Input.GetKeyDown(KeyCode.E) && PlayerDataManager.I.TryRemoveEssencePoint(essenceCost))
         {

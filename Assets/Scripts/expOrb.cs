@@ -15,7 +15,7 @@ public class expOrb : PausedBehaviour
         target = VectorMovementController.playerTransform;
     }
 
-    public override void GameUpdate ()
+    protected override void GameUpdate ()
     {
         if (target == null) return;
 

@@ -1,7 +1,8 @@
+using System;
 using System.ComponentModel;
 using UnityEngine;
 
-public class RunData : MonoBehaviour
+public class RunData : PausedBehaviour
 {
     public static RunData I { get; private set; }
     [SerializeField] private GlobalRunData _GlobalRunData;
@@ -30,6 +31,10 @@ public class RunData : MonoBehaviour
         if (I == null) I = this;
         switch (_GlobalRunData.WorldSize)
         {
+            case -1:
+                WorldRadius = 16;
+                fireBowlChank = 6;
+                break;
             case 1:
                 WorldRadius = 64;
                 fireBowlChank = 16;
@@ -49,5 +54,10 @@ public class RunData : MonoBehaviour
         }
 
         SEED = _GlobalRunData.SEED;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) SwitchPause();
     }
 }

@@ -24,7 +24,7 @@ public class CursorOnHover : PausedBehaviour, IPointerEnterHandler, IPointerExit
         CursorManager.I.ResetCursor();
     }
 
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         // 1. Если мышь вне экрана — сбросить курсор
         if (!Camera.main.pixelRect.Contains(Input.mousePosition))

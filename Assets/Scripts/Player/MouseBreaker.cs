@@ -13,7 +13,7 @@ public class MouseBreaker : PausedBehaviour
         selfCollider = GetComponent<Collider2D>();
     }
 
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         damageCooldown = Mathf.Clamp(damageCooldown - Time.deltaTime, 0, RunData.I.damageCooldown);
         Vector3 mouseScreenPos = Input.mousePosition;

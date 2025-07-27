@@ -14,13 +14,13 @@ public class FireBown : PausedBehaviour
     {
         _light2D = GetComponent<Light2D>();
     }
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         _circleCollider2D.radius = _light2D.pointLightOuterRadius;
         _light2D.pointLightOuterRadius = Mathf.Clamp(_light2D.pointLightOuterRadius - Time.deltaTime * 0.05f, 0, 3.5f);
         var main = _particleSystem.main;
         main.startLifetime = Mathf.Lerp(0.5f, 2f, Mathf.InverseLerp(0.5f, 3.5f, _light2D.pointLightOuterRadius));
-        if (playerInZone && Input.GetKeyDown(KeyCode.E) && PlayerDataManager.I.TryRemoveEssencePoint(10))
+        if (playerInZone && Input.GetKeyDown(KeyCode.E) && PlayerDataManager.I.TryRemoveEssencePoint(1))
         {
             _light2D.enabled = true;
             _particleSystem.gameObject.SetActive(true);

@@ -7,33 +7,34 @@ public class PausedBehaviour : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PAUSE = !PAUSE;
-        }
         if (PAUSE) PausedUpdate();
         else GameUpdate();
     }
 
+    protected void SwitchPause()
+    {
+        PAUSE = !PAUSE;
+    }
+    
     private void FixedUpdate()
     {
         if (PAUSE) PausedFixedUpdate();
         else GameFixedUpdate();
     }
 
-    public virtual void GameUpdate()
+    protected virtual void GameUpdate()
     {
     }
 
-    public virtual void PausedUpdate()
+    protected virtual void PausedUpdate()
     {
     }
     
-    public virtual void GameFixedUpdate()
+    protected virtual void GameFixedUpdate()
     {
     }
 
-    public virtual void PausedFixedUpdate()
+    protected virtual void PausedFixedUpdate()
     {
     }
 }

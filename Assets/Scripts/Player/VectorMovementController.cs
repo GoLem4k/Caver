@@ -60,7 +60,7 @@ public class VectorMovementController : PausedBehaviour
         lineExternalForceRaw = CreateLineRenderer(Color.blue, 0.2f);
     }
     
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         playerTransform = transform;
         leapCooldown = Mathf.Clamp(leapCooldown - Time.deltaTime, 0f, RunData.I.leapCooldown);
@@ -108,7 +108,7 @@ public class VectorMovementController : PausedBehaviour
         DebugLineUpdate();
     }
     
-    public override void GameFixedUpdate()
+    protected override void GameFixedUpdate()
     {
         rb.MovePosition(rb.position + finalMovement * Time.fixedDeltaTime);
     }

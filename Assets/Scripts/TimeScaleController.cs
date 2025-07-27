@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TimeScaleController : MonoBehaviour
 {
-    [Range(0f, 1f)]
+    [Range(0f, 10f)]
     public float timeScale = 1f; // Значение от 0 (стоп) до 1 (нормальная скорость)
 
     void Update()

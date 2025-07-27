@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class DayNightController : PausedBehaviour
 {
+    public static DayNightController I { get; private set; }
+    
     [SerializeField] private Light2D _light2D;
     [SerializeField] private Image _image;
     [SerializeField] private Color _DayColor;
@@ -21,25 +23,26 @@ public class DayNightController : PausedBehaviour
     
     private void Start()
     {
+        if (I == null) I = this;
         _targetGlobalLightVolume = _dayIdensity;
         _currentPhase = TimePhase.Day;
         _phaseTimer = _DayDuration;
     }
 
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         if (_light2D.intensity != _targetGlobalLightVolume)
         {
             switch (_currentPhase)
             {
                 case TimePhase.Day:
-                    _light2D.intensity = Mathf.Clamp(_light2D.intensity + Time.deltaTime * 0.1f, _nightIdensity, _dayIdensity);
+                    _light2D.intensity = Mathf.Clamp(_light2D.intensity + Time.deltaTime * 0.25f, _nightIdensity, _dayIdensity);
                     break;
                 case TimePhase.Night:
-                    _light2D.intensity = Mathf.Clamp(_light2D.intensity - Time.deltaTime * 0.1f, _nightIdensity, _dayIdensity);
+                    _light2D.intensity = Mathf.Clamp(_light2D.intensity - Time.deltaTime * 0.25f, _nightIdensity, _dayIdensity);
                     break;
                 default:
-                    _light2D.intensity = Mathf.Clamp(_light2D.intensity + Time.deltaTime * 0.1f, _nightIdensity, 1f);
+                    _light2D.intensity = Mathf.Clamp(_light2D.intensity + Time.deltaTime * 0.25f, _nightIdensity, 1f);
                     break;
                 
             }            
@@ -69,6 +72,7 @@ public class DayNightController : PausedBehaviour
         if (_phaseTimer == 0)
         {
             _currentPhase = TimePhase.Night;
+            _NightDuration += 10f;
         }
         transform.localScale = new Vector3(_phaseTimer / _DayDuration, 1, 0);
     }
@@ -80,6 +84,7 @@ public class DayNightController : PausedBehaviour
         {
             _phaseTimer = _DayDuration;
             _currentPhase = TimePhase.Day;
+            _DayDuration *= 0.95f;
         }
         transform.localScale = new Vector3(_phaseTimer / _NightDuration, 1, 0);
     }
@@ -98,6 +103,11 @@ public class DayNightController : PausedBehaviour
                 Debug.Log("Неопределённая фаза дня");
                 break;
         }
+    }
+
+    public bool IsDay()
+    {
+        return _currentPhase == TimePhase.Day;
     }
 }
 

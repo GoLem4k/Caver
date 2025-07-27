@@ -203,7 +203,7 @@ public class TileManager : PausedBehaviour
 
 
 
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
         SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 3);
         SyncTilemapAroundPlayer(blocksTilemap, displayTilemap, 12);

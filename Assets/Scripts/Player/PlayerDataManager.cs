@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerDataManager : PausedBehaviour
 {
@@ -11,9 +14,14 @@ public class PlayerDataManager : PausedBehaviour
     [SerializeField] public int skillPoints;
     [SerializeField] public int essencePoints;
     
-    [SerializeField] private GameObject _expBar;
+    [SerializeField] private Image _expBar;
     [SerializeField] private float _maxExp;
     [SerializeField] private float _expStep;
+
+    [SerializeField] private Image _hpBar;
+    [SerializeField] private float _currentHP;
+
+    private bool isNearFire;
 
     [SerializeField] private GameObject skillPointsUI;
     private TextMeshProUGUI _textMeshProUGUI1;
@@ -26,6 +34,7 @@ public class PlayerDataManager : PausedBehaviour
     
     public void Initialize()
     {
+        isNearFire = false;
         if (I == null) I = this;
         _expBar.transform.localScale = new Vector3Int(0, 1, 0);
         _exp = 0;
@@ -34,15 +43,23 @@ public class PlayerDataManager : PausedBehaviour
         _textMeshProUGUI1 = skillPointsUI.GetComponent<TextMeshProUGUI>();
         _textMeshProUGUI2 = essenceCounterUI.GetComponent<TextMeshProUGUI>();
     }
-    public override void GameUpdate()
+    protected override void GameUpdate()
     {
+        if (isNearFire == false && !DayNightController.I.IsDay()) _currentHP = Mathf.Clamp(_currentHP - Time.deltaTime * 5f, 0, RunData.I.health);
+        if (_currentHP < RunData.I.health)
+        {
+            _currentHP = Mathf.Clamp(_currentHP + Time.deltaTime * RunData.I.regenerationSpeed, 0, RunData.I.health);
+        }
+
+        _hpBar.fillAmount = _currentHP / RunData.I.health;
+        
         _exp += (RunData.I.expPerSecond * Time.deltaTime) * RunData.I.globalExpMultiplier;
-        _expBar.transform.localScale = new Vector3(_exp / _maxExp, 1, 0);
+        _expBar.fillAmount = _exp / _maxExp;
         if (_exp >= _maxExp)
         {
             _exp -= _maxExp;
             _maxExp += _expStep;
-            _expBar.transform.localScale = new Vector3Int(0, 1, 0);
+            _expBar.fillAmount = 0;
             AddSkillPoint();
         }
     }
@@ -74,5 +91,15 @@ public class PlayerDataManager : PausedBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.CompareTag("FireBowl")) isNearFire = true;
+    }
+    
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.CompareTag("FireBowl")) isNearFire = false;
     }
 }

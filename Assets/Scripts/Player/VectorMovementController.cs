@@ -80,28 +80,29 @@ public class VectorMovementController : PausedBehaviour
         }
         else
         {
-            moveSpeed = Mathf.Clamp(moveSpeed - RunData.I.movementSpeed * 2f * Time.deltaTime, 0f, RunData.I.movementSpeed*1.25f);
+            moveSpeed = Mathf.Clamp(moveSpeed - RunData.I.movementSpeed * 3f * Time.deltaTime, 0f, RunData.I.movementSpeed*1.25f);
 
             // Если полностью остановились — сбрасываем направление
             if (moveSpeed <= Mathf.Epsilon)
                 previousInput = Vector2.zero;
         }
-        
+
+        if (forceSpeed > moveSpeed / 2) previousInput = new Vector2(0, 0);
         
         // Здесь можно менять externalForces, например, из других систем (отбрасывание, ветер и т.п.)
-        forceSpeed = Mathf.Clamp(forceSpeed - breakingForceSpeed * Time.deltaTime, 0f, RunData.I.reboundScale * 3f);
+        forceSpeed = Mathf.Clamp(forceSpeed - breakingForceSpeed * Time.deltaTime, 0f, RunData.I.leapScale * 3f);
         if (forceSpeed <= 0) externalForces = Vector2.zero;
         
         inputMovement = previousInput * moveSpeed;
         forceMovement = externalForces.normalized * forceSpeed;
         finalMovement = inputMovement + forceMovement;
 
-        if (Input.GetKeyDown(KeyCode.Space) && leapCooldown <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && leapCooldown <= 0 && RunData.I.canLeap)
         {
             Vector2 direction = inputMovement;
             leapCooldown += RunData.I.leapCooldown;
             
-            forceSpeed += RunData.I.reboundScale;
+            forceSpeed += RunData.I.leapScale;
             AddExternalForce(direction.normalized);
         }
 
@@ -152,7 +153,7 @@ public class VectorMovementController : PausedBehaviour
         if (impactDot > 0.1f && forceSpeed >= bounceThreshold)
         {
             Vector2 reflected = Vector2.Reflect(externalForces, normal);
-            forceSpeed = Mathf.Clamp(forceSpeed * WallBounceDamping, 0f, RunData.I.reboundScale * 3f);
+            forceSpeed = Mathf.Clamp(forceSpeed * WallBounceDamping, 0f, RunData.I.leapScale * 3f);
             externalForces = reflected;
             previousInput = Vector2.zero;
             moveSpeed = RunData.I.movementSpeed;

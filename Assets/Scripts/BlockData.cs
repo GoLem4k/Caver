@@ -22,11 +22,20 @@ public class BlockData
             case BlockType.Stone:
                 _durability = (int)BlockType.Stone;
                 break;
+            case BlockType.Expstone:
+                _durability = (int)BlockType.Expstone; 
+                break;
+            case BlockType.Magicstone:
+                _durability = (int)BlockType.Magicstone; 
+                break;
+            case BlockType.Tnt:
+                _durability = (int)BlockType.Tnt; 
+                break;
             case BlockType.Endstone:
                 _durability = (int)BlockType.Endstone;
                 break;
-            case BlockType.Expstone:
-                _durability = (int)BlockType.Expstone; 
+            case BlockType.Darkstone:
+                _durability = (int)BlockType.Darkstone; 
                 break;
             default:
                 _durability = 50;
@@ -43,7 +52,7 @@ public class BlockData
 
     public void setDurability(float durability)
     {
-        if (_maxDurability == (int)BlockType.Endstone) return;
+        if (_maxDurability == (float)BlockType.Darkstone) return;
         _durability = durability;
 
         if (!_isBeingDestroyed)
@@ -66,12 +75,40 @@ public class BlockData
         _isBeingDestroyed = true;
         
         BlockDataManager.I.SpawnExpOrb(_position);
-        
 
-        if (this.type == BlockType.Expstone)
+
+        switch (type)
         {
-            TileManager.I.StartCoroutine(TileManager.I.DamageNeighborsWithDelay(_position, _maxDurability));
+            case BlockType.Dirt:
+                BlockDataManager.I.SpawnExpOrb(_position);
+                break;
+            case BlockType.Stone:
+                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnExpOrb(_position);
+                break;
+            case BlockType.Expstone:
+                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnExpOrb(_position);
+                break;
+            case BlockType.Magicstone:
+                TileManager.I.StartCoroutine(TileManager.I.DamageNeighborsWithDelay(_position, _maxDurability));
+                BlockDataManager.I.SpawnExpOrb(_position);
+                break;
+            case BlockType.Endstone:
+                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnExpOrb(_position);
+                break;
+            case BlockType.Tnt:
+                BlockDataManager.I.SpawnExpOrb(_position);
+                TileManager.I.DamageSurrounded(_position, 25);
+                break;
+            default:
+                Debug.Log("Уничтожение неизвесного блока");
+                break;
         }
+        
 
         TileManager.ClearCell(_position);
         BlockDataManager.RemoveBlock(this);

@@ -9,7 +9,7 @@ public class Initializer : MonoBehaviour
     public UpgradesManager upgradesManager;
     public RunData runData;
     
-    void Start()
+    void Awake()
     {
         runData.Initialize();
         tileManager.Initialize();

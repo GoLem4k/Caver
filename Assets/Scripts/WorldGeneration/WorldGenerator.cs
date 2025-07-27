@@ -49,7 +49,7 @@ public class WorldGenerator : MonoBehaviour
     
     private System.Random rng;
     
-    Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
+    public static Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
         new Vector3Int(1, 0, 0),     // справа
         new Vector3Int(-1, 0, 0),    // слева
         new Vector3Int(0, 1, 0),     // сверху
@@ -81,16 +81,24 @@ public class WorldGenerator : MonoBehaviour
 
         gBgCircleArea(new Vector3Int(0,0,0), WORLDRADIUS*2);
         gBlockCircleArea(new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Stone); //Генерация основы мира из камня
-        gBlockRingArea(new Vector3Int(0,0,0), WORLDRADIUS+spaceBetweenWorldAndEdge, WORLDRADIUS+spaceBetweenWorldAndEdge+worldEdgeSize, BlockType.Endstone); //Генерация границы мира
+        gBlockRingArea(new Vector3Int(0,0,0), WORLDRADIUS+spaceBetweenWorldAndEdge, WORLDRADIUS+spaceBetweenWorldAndEdge+worldEdgeSize, BlockType.Darkstone); //Генерация границы мира
         gBlockCircleArea(SPAWNPOINT, spawnAreaRadius, BlockType.None); //Генерация спавн зоны
         gNoiseBlocksInRadius(RunData.I.SEED, airNoiseScale, airMinThreshold, airMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.None, BlockType.Stone); //Генерация пещер
         gNoiseBlocksInRadius(RunData.I.SEED, dirtNoiseScale, dirtMinThreshold, dirtMaxThreshold, new Vector3Int(0,0,0), WORLDRADIUS, BlockType.Dirt, BlockType.Stone); //Генерация земли
         gFireBowlOnePerChunk(new Vector3Int(0,0,0), WORLDRADIUS, RunData.I.fireBowlChank); //Генерация чаш с онём
         FindAltarPlacesInFourQuadrants(new Vector2(0,0), WORLDRADIUS, WORLDRADIUS * 0.25f);
         //GenerateOres(); //Генерация медной руды
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 5; i++)
         {
-            gTunnelBlocksToPos(GetRandomPointOnCircle(new Vector3Int(0,0,0), WORLDRADIUS/2), NEIGHBOURS4X[rng.Next(NEIGHBOURS4X.Count())], 0.4f, 16, BlockType.Expstone);
+            gTunnelBlocksToPos(GetRandomPointOnCircle(new Vector3Int(0,0,0), WORLDRADIUS/2), NEIGHBOURS4X[rng.Next(NEIGHBOURS4X.Count())], 0.4f, 16, BlockType.Magicstone);
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            TileManager.I.SetCell(GetRandomPointOnCircle(new Vector3Int(0,0,0), WORLDRADIUS/3), BlockType.Tnt);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            TileManager.I.SetCell(GetRandomPointOnCircle(new Vector3Int(0,0,0), WORLDRADIUS/4), BlockType.Expstone);
         }
     }
 

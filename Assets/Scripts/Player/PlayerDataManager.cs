@@ -36,7 +36,6 @@ public class PlayerDataManager : PausedBehaviour
     {
         isNearFire = false;
         if (I == null) I = this;
-        _expBar.transform.localScale = new Vector3Int(0, 1, 0);
         _exp = 0;
         skillPoints = 0;
         essencePoints = 0;

@@ -25,8 +25,11 @@ public class TileManager : PausedBehaviour
 
     [SerializeField] private BlockTile dirtTile;
     [SerializeField] private BlockTile stoneTile;
-    [SerializeField] private BlockTile expstoneTile;
     [SerializeField] private BlockTile endstoneTile;
+    [SerializeField] private BlockTile expstoneTile;
+    [SerializeField] private BlockTile magicstoneTile;
+    [SerializeField] private BlockTile tntTile;
+    [SerializeField] private BlockTile darkstoneTile;
     [SerializeField] private BlockTile debugSmartTile;
     
     [SerializeField] private RuleTile bgRuleTile;
@@ -34,6 +37,7 @@ public class TileManager : PausedBehaviour
     private Vector3Int previousSelectorPos;
     private Vector3Int currentSelectorPos;
     [SerializeField] private Tile selectorTile;
+    [SerializeField] private Tile selectorCooldownTile;
 
     private List<Vector3Int> toDestroy = new List<Vector3Int>();
     
@@ -80,8 +84,17 @@ public class TileManager : PausedBehaviour
             case BlockType.Expstone:
                 blockTile = expstoneTile;
                 break;
+            case BlockType.Magicstone:
+                blockTile = magicstoneTile;
+                break;
+            case BlockType.Tnt:
+                blockTile = tntTile;
+                break;
             case BlockType.Endstone:
                 blockTile = endstoneTile;
+                break;
+            case BlockType.Darkstone:
+                blockTile = darkstoneTile;
                 break;
             default:
                 Debug.Log("Ошибка с типом блока для размещения");
@@ -123,7 +136,7 @@ public class TileManager : PausedBehaviour
                 }
 
             Vector3Int neighborPos = origin + offset;
-            if (IsBlockOnPos(neighborPos, BlockType.Expstone))
+            if (IsBlockOnPos(neighborPos, BlockType.Magicstone))
             {
                 if (!toDestroy.Contains(neighborPos))
                 {
@@ -133,6 +146,17 @@ public class TileManager : PausedBehaviour
                     toDestroy.Remove(neighborPos);
                 }
             }
+        }
+    }
+
+    public void DamageSurrounded(Vector3Int pos, float damage)
+    {
+        foreach (var offset in WorldGenerator.NEIGHBOURS8X)
+        {
+            if (!IsBlockOnPos(pos, BlockType.None))
+            {
+                DamageBlock(pos + offset, damage);
+            };
         }
     }
     
@@ -177,20 +201,22 @@ public class TileManager : PausedBehaviour
         return false;
     }
 
-    public void SetSelectorTileOnPos(Vector3Int pos)
+    public void SetSelectorTileOnPos(Vector3Int pos, bool isCooldown)
     {
         if (pos != currentSelectorPos)
         {
             previousSelectorPos = currentSelectorPos;
             currentSelectorPos = pos;
-            selectorTilemap.SetTile(pos, selectorTile);
             selectorTilemap.SetTile(previousSelectorPos, null);            
         }
+        selectorTilemap.SetTile(pos, (isCooldown) ? selectorCooldownTile : selectorTile);
     }
+    
 
     public void ResetSelector()
     {
         selectorTilemap.SetTile(currentSelectorPos, null);
+        currentSelectorPos = new Vector3Int(0,0,-1);
     }
 
     public void DamageSelectTile()
@@ -205,7 +231,7 @@ public class TileManager : PausedBehaviour
 
     protected override void GameUpdate()
     {
-        SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 3);
+        SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 4);
         SyncTilemapAroundPlayer(blocksTilemap, displayTilemap, 12);
         SyncTilemapAroundPlayer(BackgroundTilemap, bgDynemicsTilemap, 12);
     }
@@ -249,8 +275,11 @@ public class TileManager : PausedBehaviour
 
 public enum BlockType {
     None,
-    Dirt = 50,
-    Stone = 100,
-    Expstone = 40,
-    Endstone = 500
+    Dirt = 25,
+    Expstone = 30,
+    Stone = 55,
+    Tnt = 60,
+    Endstone = 75,
+    Magicstone = 90,
+    Darkstone = -1
 }

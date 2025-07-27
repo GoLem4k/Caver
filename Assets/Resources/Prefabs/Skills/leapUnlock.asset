@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: leapUnlock
   m_EditorClassIdentifier: 
   _imageActive: {fileID: 8637311036866665520, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
-  _imageInactive: {fileID: 9101752143483502170, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
+  _imageInactive: {fileID: -8751764464060839332, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
   _id: 34
   _maxLevel: 1
   _discription: "\u041E\u0442\u043A\u0440\u044B\u0432\u0430\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C

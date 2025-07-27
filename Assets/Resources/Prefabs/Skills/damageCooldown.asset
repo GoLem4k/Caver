@@ -15,6 +15,6 @@ MonoBehaviour:
   _imageActive: {fileID: -979634279710815963, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
   _imageInactive: {fileID: -8137839267706186765, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
   _id: 5
-  _maxLevel: 5
+  _maxLevel: 4
   _discription: "\u0423\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442 \u043F\u0435\u0440\u0435\u0437\u0430\u0440\u044F\u0434\u043A\u0443
     \u0443\u0434\u0430\u0440\u0430"

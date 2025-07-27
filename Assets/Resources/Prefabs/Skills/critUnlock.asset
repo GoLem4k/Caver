@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: critUnlock
   m_EditorClassIdentifier: 
   _imageActive: {fileID: -3647463822961986966, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
-  _imageInactive: {fileID: -8602575724214924652, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
+  _imageInactive: {fileID: -2097593393608851709, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
   _id: 33
   _maxLevel: 1
   _discription: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u0443\u0435\u0442

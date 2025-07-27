@@ -8,6 +8,8 @@ public class BlockDataManager : MonoBehaviour
     public static BlockDataManager I { get; private set; }
     
     public static Dictionary<Vector3Int, BlockData> blockDataDict = new Dictionary<Vector3Int, BlockData>();
+    
+    private System.Random rng;
 
     public static void AddBlock(BlockData block)
     {
@@ -29,6 +31,7 @@ public class BlockDataManager : MonoBehaviour
 
     private void Start()
     {
+        rng = new System.Random(RunData.I.SEED);
         if (I == null) I = this;
     }
 
@@ -63,6 +66,6 @@ public class BlockDataManager : MonoBehaviour
     public void SpawnExpOrb(Vector3Int pos)
     {
         GameObject orb = Instantiate(_expOrb);
-        orb.transform.position = pos+ new Vector3(0.5f,0.5f, 0);
+        orb.transform.position = pos+ new Vector3(0.5f + (float)rng.NextDouble()*0.8f - 0.4f,0.5f + (float)rng.NextDouble()*0.8f - 0.4f, 0);
     }
 }

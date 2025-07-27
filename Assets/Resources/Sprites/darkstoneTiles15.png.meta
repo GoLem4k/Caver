@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dbba409f8c765b44894b6b96e7f9419c
+guid: fc564df7b02d00b4f959976744b4e977
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1668820564906396290
-    second: expstoneTiles15_0
+      213: 7940234418188001779
+    second: darkstoneTiles15_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: expstoneTiles15_0
+      name: darkstoneTiles15_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 28acc154677d82710800000000000000
-      internalID: 1668820564906396290
+      spriteID: 3f12d695221613e60800000000000000
+      internalID: 7940234418188001779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_1
+      name: darkstoneTiles15_1
       rect:
         serializedVersion: 2
         x: 16
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4659df33ea40f9a40b1ec426f56073b1
-      internalID: -1329502331
+      spriteID: c8de65f66a14d524e9a191bb0d56e805
+      internalID: 1317020460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_2
+      name: darkstoneTiles15_2
       rect:
         serializedVersion: 2
         x: 32
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 916d6a06a74ec8e4f88adeeb6623f25c
-      internalID: 655553002
+      spriteID: 771a5a8401641454380b9f1b5b7fb490
+      internalID: 592005017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_3
+      name: darkstoneTiles15_3
       rect:
         serializedVersion: 2
         x: 48
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaa4c572889af6449abcdb637b3310e1
-      internalID: -41245804
+      spriteID: 037c20de60fd071409b52067c4e200ce
+      internalID: -518803494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_4
+      name: darkstoneTiles15_4
       rect:
         serializedVersion: 2
         x: 64
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9aa7483c050bacf4aa7429991c80e9c9
-      internalID: 261817838
+      spriteID: 4a870f11120872341a6e7869234456f2
+      internalID: 93763490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_5
+      name: darkstoneTiles15_5
       rect:
         serializedVersion: 2
         x: 0
@@ -225,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b592dfb98692b594eb26d236703d031d
-      internalID: 1883168822
+      spriteID: 4ddcc99e5483ff641ae3007f2efeaddd
+      internalID: -424878498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_6
+      name: darkstoneTiles15_6
       rect:
         serializedVersion: 2
         x: 16
@@ -247,14 +247,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8964b04825d29a747bc63961d7aca250
-      internalID: -1134389332
+      spriteID: 4f8d0e9139a66474caad5d571f38c20f
+      internalID: 97224714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_7
+      name: darkstoneTiles15_7
       rect:
         serializedVersion: 2
         x: 32
@@ -269,14 +269,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e743916384be7147bf6a605fb17f15d
-      internalID: -348197348
+      spriteID: 8085ee03e3cf85c45bd7d9d91c8e2693
+      internalID: 1263477934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_8
+      name: darkstoneTiles15_8
       rect:
         serializedVersion: 2
         x: 48
@@ -291,14 +291,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd8d1bd3a4794ec43a7b3f16a785027b
-      internalID: 534124756
+      spriteID: 4e5fa9da84df0534ba330fb05becd65b
+      internalID: 627224302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_9
+      name: darkstoneTiles15_9
       rect:
         serializedVersion: 2
         x: 64
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44ff5ecc18cb51f4d8c0168d5988cc92
-      internalID: 857023449
+      spriteID: 49167182fe1e1b6438e5bcf50efaf7a3
+      internalID: -705098084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_10
+      name: darkstoneTiles15_10
       rect:
         serializedVersion: 2
         x: 0
@@ -335,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5a0bcf9fb472d44ab48ab6abedc16f7
-      internalID: -542769307
+      spriteID: 6f8f30b1ea6eccc48b9dd481cc35bf36
+      internalID: -637751868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_11
+      name: darkstoneTiles15_11
       rect:
         serializedVersion: 2
         x: 16
@@ -357,14 +357,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e275e0b005f0114fbe510bd8dc19f5c
-      internalID: 1041297421
+      spriteID: efb6dd3411c681140a71a31510bcfad0
+      internalID: -575715794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_12
+      name: darkstoneTiles15_12
       rect:
         serializedVersion: 2
         x: 32
@@ -379,14 +379,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f22b3d115ac68c42a005165c4d3b399
-      internalID: -102791722
+      spriteID: f0d163af37f74af45922ae9847deebd4
+      internalID: 406981461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_13
+      name: darkstoneTiles15_13
       rect:
         serializedVersion: 2
         x: 48
@@ -401,14 +401,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93ecca51fc24d8b4ba181959e92844c1
-      internalID: 561300843
+      spriteID: 6a42c3b1a7f4727408123a47224ecb21
+      internalID: 77445270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: expstoneTiles15_14
+      name: darkstoneTiles15_14
       rect:
         serializedVersion: 2
         x: 64
@@ -423,8 +423,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eecce9bb9e504e459e961abc5e482da
-      internalID: -1204028691
+      spriteID: 98cebfc11e3894040a9641bf64767af5
+      internalID: 1907249042
       vertices: []
       indices: 
       edges: []
@@ -433,7 +433,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e1d0972e70a887d44ae2c63ef889bdf3
+    spriteID: 4434e94be2506ca4d95572b9084f40c1
     internalID: 0
     vertices: []
     indices: 
@@ -443,21 +443,21 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      expstoneTiles15_0: 1668820564906396290
-      expstoneTiles15_1: -1329502331
-      expstoneTiles15_10: -542769307
-      expstoneTiles15_11: 1041297421
-      expstoneTiles15_12: -102791722
-      expstoneTiles15_13: 561300843
-      expstoneTiles15_14: -1204028691
-      expstoneTiles15_2: 655553002
-      expstoneTiles15_3: -41245804
-      expstoneTiles15_4: 261817838
-      expstoneTiles15_5: 1883168822
-      expstoneTiles15_6: -1134389332
-      expstoneTiles15_7: -348197348
-      expstoneTiles15_8: 534124756
-      expstoneTiles15_9: 857023449
+      darkstoneTiles15_0: 7940234418188001779
+      darkstoneTiles15_1: 1317020460
+      darkstoneTiles15_10: -637751868
+      darkstoneTiles15_11: -575715794
+      darkstoneTiles15_12: 406981461
+      darkstoneTiles15_13: 77445270
+      darkstoneTiles15_14: 1907249042
+      darkstoneTiles15_2: 592005017
+      darkstoneTiles15_3: -518803494
+      darkstoneTiles15_4: 93763490
+      darkstoneTiles15_5: -424878498
+      darkstoneTiles15_6: 97224714
+      darkstoneTiles15_7: 1263477934
+      darkstoneTiles15_8: 627224302
+      darkstoneTiles15_9: -705098084
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageActive: {fileID: -1148165678238741113, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
   _imageInactive: {fileID: 7332436458939416571, guid: e4b42eea16c94d544a85393e884a245e, type: 3}
-  _id: 21
+  _id: 20
   _maxLevel: 3
   _discription: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
     \u0448\u0430\u043D\u0441 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u044F

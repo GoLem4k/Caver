@@ -87,7 +87,7 @@ public class VectorMovementController : PausedBehaviour
                 previousInput = Vector2.zero;
         }
 
-        if (forceSpeed > moveSpeed / 2) previousInput = new Vector2(0, 0);
+        if (forceSpeed + moveSpeed > RunData.I.movementSpeed && forceSpeed > 0) moveSpeed = Mathf.Clamp(moveSpeed-forceSpeed, 0, RunData.I.movementSpeed);
         
         // Здесь можно менять externalForces, например, из других систем (отбрасывание, ветер и т.п.)
         forceSpeed = Mathf.Clamp(forceSpeed - breakingForceSpeed * Time.deltaTime, 0f, RunData.I.leapScale * 3f);

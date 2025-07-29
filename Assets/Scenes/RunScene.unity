@@ -2029,7 +2029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7f1bdcbd834fb4d8534474a107e318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _expOrb: {fileID: 1003159643864182638, guid: 2fe6e1cf05c2216418994d3461e3bab5, type: 3}
+  _defaultExpOrb: {fileID: 1003159643864182638, guid: 71f0298c179d0ca47aabc533c86e1373, type: 3}
+  _greenExpOrb: {fileID: 1003159643864182638, guid: 2fe6e1cf05c2216418994d3461e3bab5, type: 3}
+  _purpleExpOrb: {fileID: 1003159643864182638, guid: b68356c56858b2047a5fac5801e4a246, type: 3}
 --- !u!114 &576026043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,7 +2045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _GlobalRunData: {fileID: 11400000, guid: b224053649a541e418f525f3c2e6e0ca, type: 2}
-  SEED: 765381
+  SEED: 12345
   WorldRadius: 0
   fireBowlChank: 18
   movementSpeed: 3
@@ -2061,8 +2063,8 @@ MonoBehaviour:
   globalExpMultiplier: 1
   canCrit: 0
   canLeap: 0
-  essenceEfficiency: 0.5
-  fireBowlRange: 3
+  essenceEfficiency: 1
+  fireBowlRange: 1
   fireBowlPointer: 0
 --- !u!114 &576026044
 MonoBehaviour:

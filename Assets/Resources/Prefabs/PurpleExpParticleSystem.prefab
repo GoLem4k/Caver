@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7914896267508632908}
   - component: {fileID: 8191715385295056725}
   m_Layer: 0
-  m_Name: ExpParticleSystem
+  m_Name: PurpleExpParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1308,7 +1308,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.50490093, g: 0.8301887, b: 0.4816661, a: 1}
+        key0: {r: 0.685994, g: 0.48235294, b: 0.83137256, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}

@@ -27,7 +27,9 @@ public class BlockDataManager : MonoBehaviour
     }
 
 
-    [SerializeField] private GameObject _expOrb;
+    [SerializeField] private GameObject _defaultExpOrb;
+    [SerializeField] private GameObject _greenExpOrb;
+    [SerializeField] private GameObject _purpleExpOrb;
 
     private void Start()
     {
@@ -63,9 +65,21 @@ public class BlockDataManager : MonoBehaviour
         return $"Dirt: {dirtCount}, Stone: {stoneCount}, Endstone: {endstoneCount}, Expstone: {expstoneCount}";
     }
 
-    public void SpawnExpOrb(Vector3Int pos)
+    public void SpawnGreenExpOrb(Vector3Int pos)
     {
-        GameObject orb = Instantiate(_expOrb);
+        GameObject orb = Instantiate(_greenExpOrb);
+        orb.transform.position = pos+ new Vector3(0.5f + (float)rng.NextDouble()*0.8f - 0.4f,0.5f + (float)rng.NextDouble()*0.8f - 0.4f, 0);
+    }
+    
+    public void SpawnPurpleExpOrb(Vector3Int pos)
+    {
+        GameObject orb = Instantiate(_purpleExpOrb);
+        orb.transform.position = pos+ new Vector3(0.5f + (float)rng.NextDouble()*0.8f - 0.4f,0.5f + (float)rng.NextDouble()*0.8f - 0.4f, 0);
+    }
+    
+    public void SpawnDefaultExpOrb(Vector3Int pos)
+    {
+        GameObject orb = Instantiate(_defaultExpOrb);
         orb.transform.position = pos+ new Vector3(0.5f + (float)rng.NextDouble()*0.8f - 0.4f,0.5f + (float)rng.NextDouble()*0.8f - 0.4f, 0);
     }
 }

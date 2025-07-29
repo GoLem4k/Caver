@@ -32,8 +32,8 @@ public class RunData : PausedBehaviour
     
     [Header("Возможность критовать")] public bool canCrit = false;
     [Header("Возможность Делать рывок")] public bool canLeap = false;
-    [Header("Эффективность эссенций")] public float essenceEfficiency = 0.5f;
-    [Header("Радиус света от чаш с огнём")] public float fireBowlRange = 3f;
+    [Header("Эффективность эссенций")] public float essenceEfficiency = 1f;
+    [Header("Радиус света от чаш с огнём")] public float fireBowlRange = 1f;
     [Header("Указатель на чашу")] public bool fireBowlPointer = false;
     public void Initialize()
     {

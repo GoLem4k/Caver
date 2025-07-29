@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4631210454000681438}
   - component: {fileID: -6952360633107179103}
   m_Layer: 0
-  m_Name: expOrb
+  m_Name: greenExpOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,4 +151,4 @@ MonoBehaviour:
   speed: 4
   moveRadius: 50
   _expParticle: {fileID: 7914896267508632908, guid: 85edb19d229d0124691a1bd1acc2d5e3, type: 3}
-  _expParticleInstantiate: {fileID: 0}
+  _expCount: 10

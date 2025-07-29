@@ -73,35 +73,30 @@ public class BlockData
         
         if (_isBeingDestroyed) return;
         _isBeingDestroyed = true;
-        
-        BlockDataManager.I.SpawnExpOrb(_position);
 
 
         switch (type)
         {
             case BlockType.Dirt:
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnDefaultExpOrb(_position);
                 break;
             case BlockType.Stone:
-                BlockDataManager.I.SpawnExpOrb(_position);
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnDefaultExpOrb(_position);
                 break;
             case BlockType.Expstone:
-                BlockDataManager.I.SpawnExpOrb(_position);
-                BlockDataManager.I.SpawnExpOrb(_position);
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnGreenExpOrb(_position);
+                BlockDataManager.I.SpawnGreenExpOrb(_position);
+                BlockDataManager.I.SpawnGreenExpOrb(_position);
                 break;
             case BlockType.Magicstone:
                 TileManager.I.StartCoroutine(TileManager.I.DamageNeighborsWithDelay(_position, _maxDurability));
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnPurpleExpOrb(_position);
                 break;
             case BlockType.Endstone:
-                BlockDataManager.I.SpawnExpOrb(_position);
-                BlockDataManager.I.SpawnExpOrb(_position);
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnDefaultExpOrb(_position);
                 break;
             case BlockType.Tnt:
-                BlockDataManager.I.SpawnExpOrb(_position);
+                BlockDataManager.I.SpawnDefaultExpOrb(_position);
                 TileManager.I.DamageSurrounded(_position, 25);
                 break;
             default:

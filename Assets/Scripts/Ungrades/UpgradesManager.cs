@@ -91,10 +91,10 @@ public class UpgradesManager : PausedBehaviour
                 RunData.I.canLeap = true;
                 break;
             case 35:
-                RunData.I.essenceEfficiency += 0.25f;
+                RunData.I.essenceEfficiency += 0.2f;
                 break;
             case 36:
-                RunData.I.fireBowlRange += 2f;
+                RunData.I.fireBowlRange += 0.25f;
                 break;
             case 37:
                 RunData.I.fireBowlPointer = true;

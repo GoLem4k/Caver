@@ -8,7 +8,8 @@ public class expOrb : PausedBehaviour
     public float moveRadius = 5f;          
     
     [SerializeField] private ParticleSystem _expParticle;
-    [SerializeField] private ParticleSystem _expParticleInstantiate;
+    [SerializeField] private float _expCount;
+    private ParticleSystem _expParticleInstantiate;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class expOrb : PausedBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerDataManager.I._exp += 10;
+            PlayerDataManager.I._exp += _expCount;
             PlayerDataManager.I.AddEssencePoint(1);
             _expParticleInstantiate = Instantiate(_expParticle, target);
             Destroy(gameObject);

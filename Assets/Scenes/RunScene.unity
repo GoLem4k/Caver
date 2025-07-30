@@ -1621,7 +1621,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1974,6 +1974,7 @@ GameObject:
   - component: {fileID: 576026041}
   - component: {fileID: 576026040}
   - component: {fileID: 576026042}
+  - component: {fileID: 576026046}
   - component: {fileID: 576026043}
   - component: {fileID: 576026044}
   - component: {fileID: 576026045}
@@ -2002,6 +2003,7 @@ MonoBehaviour:
   playerDataManager: {fileID: 1404065273}
   upgradesManager: {fileID: 1214530696}
   runData: {fileID: 576026043}
+  structureManager: {fileID: 576026046}
 --- !u!4 &576026041
 Transform:
   m_ObjectHideFlags: 0
@@ -2091,6 +2093,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20f0a4e2ab118f44aab57f3448bf31dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &576026046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576026039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3368e33b61b441419fccd72cb51c7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &614951990
@@ -7062,7 +7076,7 @@ MonoBehaviour:
   _maxExp: 100
   _expStep: 20
   _hpBar: {fileID: 782637596}
-  _currentHP: 50
+  _currentHP: 100
   skillPointsUI: {fileID: 779303615}
   essenceCounterUI: {fileID: 1225470049}
   _exp: 0

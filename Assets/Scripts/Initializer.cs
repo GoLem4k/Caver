@@ -8,9 +8,11 @@ public class Initializer : MonoBehaviour
     public PlayerDataManager playerDataManager;
     public UpgradesManager upgradesManager;
     public RunData runData;
+    public StructureManager structureManager;
     
     void Awake()
     {
+        structureManager.Initialize();
         runData.Initialize();
         tileManager.Initialize();
         worldGenerator.Initialize();

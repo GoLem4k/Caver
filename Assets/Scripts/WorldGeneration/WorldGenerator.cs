@@ -149,11 +149,12 @@ public class WorldGenerator : MonoBehaviour
                 float distSqr = (tilePos.x - center.x) * (tilePos.x - center.x) + (tilePos.y - center.y) * (tilePos.y - center.y);
                 if (distSqr > radius * radius) continue;
 
-                if (!TileManager.IsBlockOnPos(tilePos, BlockType.None)) continue;
+                if (TileManager.IsBlockOnPos(tilePos)) continue;
 
                 Vector3 worldPos = new Vector3(tilePos.x + 0.5f, tilePos.y + 0.5f, 0);
-                GameObject fireBowl = Instantiate(_fireBowl);
-                fireBowl.transform.position = worldPos;
+                _fireBowl.transform.position = worldPos;
+                GameObject newFireBowl = Instantiate(_fireBowl);
+                newFireBowl.GetComponent<Structure>().Initialize();
             }
         }
     }
@@ -208,8 +209,9 @@ public class WorldGenerator : MonoBehaviour
             TileManager.I.SetCell(pos + offset, BlockType.None);
         }
         TileManager.I.SetCell(pos, BlockType.None);
+        altar.transform.position = worldPos;
         GameObject newAltar = Instantiate(altar);
-        newAltar.transform.position = worldPos;
+        newAltar.GetComponent<Structure>().Initialize();
     }
     
     private void gBgCircleArea(Vector3Int center, int radius)

@@ -153,7 +153,7 @@ public class TileManager : PausedBehaviour
     {
         foreach (var offset in WorldGenerator.NEIGHBOURS8X)
         {
-            if (!IsBlockOnPos(pos, BlockType.None))
+            if (!IsBlockOnPos(pos + offset, BlockType.None))
             {
                 DamageBlock(pos + offset, damage);
             };
@@ -189,6 +189,12 @@ public class TileManager : PausedBehaviour
             return tile == null;
         }
         return tile is BlockTile blockTile && blockTile.type == type;
+    }
+
+    public static bool IsBlockOnPos(Vector3Int pos)
+    {
+        var tile = BlocksTilemap.GetTile(pos);
+        return tile != null;
     }
 
     public bool IsTileByWorldPos(Vector3 pos)
@@ -281,5 +287,6 @@ public enum BlockType {
     Tnt = 60,
     Endstone = 75,
     Magicstone = 90,
-    Darkstone = -1
+    Darkstone = -1,
+    
 }

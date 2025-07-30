@@ -4932,9 +4932,9 @@ GameObject:
   - component: {fileID: 3601833196778607525}
   - component: {fileID: 3517851745973008685}
   - component: {fileID: 1755046638648847051}
-  - component: {fileID: -7100651745521716544}
+  - component: {fileID: 3542920511296147620}
   m_Layer: 0
-  m_Name: altar2
+  m_Name: altar3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4949,7 +4949,7 @@ Transform:
   m_GameObject: {fileID: 6467349775753138247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.5, y: 23.5, z: 0}
+  m_LocalPosition: {x: 5.5, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5001,7 +5001,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -670930033658401864, guid: 0408b2638a9fe114086ed46d929f6a43, type: 3}
+  m_Sprite: {fileID: -131212418, guid: 0408b2638a9fe114086ed46d929f6a43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5070,12 +5070,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5715e247a960db499497a0acd3961d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activatedSprite: {fileID: -768855117, guid: 0408b2638a9fe114086ed46d929f6a43, type: 3}
-  id: 1
+  _interactIcon: {fileID: 4312808022604170828}
+  _keyCode: 101
+  _behaviorUpdateInterval: 0.2
+  playerTransform: {fileID: 0}
+  _activatedSprite: {fileID: -1925312929, guid: 0408b2638a9fe114086ed46d929f6a43, type: 3}
+  id: 2
   essenceCost: 1
-  eIcon: {fileID: 4312808022604170828}
   _particleSystem: {fileID: 3634552897839953880}
---- !u!58 &-7100651745521716544
+--- !u!58 &3542920511296147620
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

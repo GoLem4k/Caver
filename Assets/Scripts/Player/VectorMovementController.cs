@@ -52,7 +52,7 @@ public class VectorMovementController : PausedBehaviour
         rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<PlayerAnimationController>();
 
-        transform.position = WorldGenerator.SPAWNPOINT;
+        transform.position = RunData.I.SPAWNPOINT;
         
         lineFinal = CreateLineRenderer(Color.white, 0.03f);
         lineInput = CreateLineRenderer(Color.red, 0.07f);

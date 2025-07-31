@@ -5,9 +5,10 @@ using UnityEngine;
 public class RunData : PausedBehaviour
 {
     public static RunData I { get; private set; }
-    [SerializeField] private GlobalRunData _GlobalRunData;
+    [SerializeField] public GlobalRunData globalRunData;
     
     [Header("Сид забега")] public int SEED;
+    [Header("Точка спавна")] public Vector3Int SPAWNPOINT;
     [Header("Размер мира")] public int WorldRadius;
     [Header("Размер чанка где может заспавнится чаша")] public int fireBowlChank = 16;
     
@@ -38,31 +39,7 @@ public class RunData : PausedBehaviour
     public void Initialize()
     {
         if (I == null) I = this;
-        switch (_GlobalRunData.WorldSize)
-        {
-            case -1:
-                WorldRadius = 16;
-                fireBowlChank = 6;
-                break;
-            case 1:
-                WorldRadius = 64;
-                fireBowlChank = 16;
-                break;
-            case 2:
-                WorldRadius = 96;
-                fireBowlChank = 20;
-                break;
-            case 3:
-                WorldRadius = 128;
-                fireBowlChank = 24;
-                break;
-            default:
-                WorldRadius = 96;
-                fireBowlChank = 20;
-                break;
-        }
-
-        SEED = _GlobalRunData.SEED;
+        SEED = globalRunData.SEED;
     }
 
     private void Update()

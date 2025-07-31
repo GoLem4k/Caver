@@ -32,7 +32,7 @@ public class expOrb : PausedBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerDataManager.I._exp += _expCount;
+            PlayerDataManager.I._exp += _expCount*RunData.I.globalExpMultiplier;
             PlayerDataManager.I.AddEssencePoint(1);
             _expParticleInstantiate = Instantiate(_expParticle, target);
             Destroy(gameObject);

@@ -11,7 +11,7 @@ public class WorldSizeSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private Sprite _HightLightSprite;
     [SerializeField] private Sprite _SelectedSprite;
     [SerializeField] private Image _image;
-    [SerializeField] private int _worldSizeID;
+    [SerializeField] private WorldSize _worldSize;
     [SerializeField] public static List<WorldSizeSelect> WorldSizeSelects = new List<WorldSizeSelect>();
 
     private void Awake()
@@ -42,6 +42,6 @@ public class WorldSizeSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
             wss.ResetSprite();
         }
         _image.sprite = _SelectedSprite;
-        StartMenu.I.SetWorldSize(_worldSizeID);
+        StartMenu.I.SetWorldSize(_worldSize);
     }
 }

@@ -15,7 +15,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private TMP_InputField _inputField;
 
     
-    private int _worldSize;
+    private WorldSize _worldSize;
 
     private void Start()
     {
@@ -36,7 +36,7 @@ public class StartMenu : MonoBehaviour
 
 
 
-    public void SetWorldSize(int worldSize)
+    public void SetWorldSize(WorldSize worldSize)
     {
         _worldSize = worldSize;
     }

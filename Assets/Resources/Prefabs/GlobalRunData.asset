@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f71fe02d79799449f2037e98d73000, type: 3}
   m_Name: GlobalRunData
   m_EditorClassIdentifier: 
-  WorldSize: -1
+  WorldSize: 0
   SEED: 12345

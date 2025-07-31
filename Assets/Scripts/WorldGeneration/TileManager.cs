@@ -50,6 +50,28 @@ public class TileManager : PausedBehaviour
     private BoundsInt _lastBounds;
     private TileBase[] _lastTiles;
     
+    Vector3 lastPlayerCell;
+    int frameCounter;
+    
+    public static Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
+        new Vector3Int(1, 0, 0),     // справа
+        new Vector3Int(-1, 0, 0),    // слева
+        new Vector3Int(0, 1, 0),     // сверху
+        new Vector3Int(0, -1, 0),    // снизу
+        new Vector3Int(-1, 1, 0),    // сверху и слева
+        new Vector3Int(1, 1, 0),    // сверху и справа
+        new Vector3Int(-1, -1, 0),    // снизу и слева
+        new Vector3Int(1, -1, 0)    // снизу и справа
+    };
+    
+    public static Vector3Int[] NEIGHBOURS4X = new Vector3Int[] {
+        new Vector3Int(1, 0, 0),     // справа
+        new Vector3Int(-1, 0, 0),    // слева
+        new Vector3Int(0, 1, 0),     // сверху
+        new Vector3Int(0, -1, 0)    // снизу
+    };
+
+    
 
     public void Initialize()
     {
@@ -127,7 +149,7 @@ public class TileManager : PausedBehaviour
     {
         float delay = 0.1f; // задержка между разрушениями
 
-        foreach (var offset in WorldGenerator.NEIGHBOURS4X)
+        foreach (var offset in NEIGHBOURS4X)
         {
             if (PAUSE)
                 while (PAUSE)
@@ -151,7 +173,7 @@ public class TileManager : PausedBehaviour
 
     public void DamageSurrounded(Vector3Int pos, float damage)
     {
-        foreach (var offset in WorldGenerator.NEIGHBOURS8X)
+        foreach (var offset in NEIGHBOURS8X)
         {
             if (!IsBlockOnPos(pos + offset, BlockType.None))
             {
@@ -237,9 +259,16 @@ public class TileManager : PausedBehaviour
 
     protected override void GameUpdate()
     {
-        SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 4);
-        SyncTilemapAroundPlayer(blocksTilemap, displayTilemap, 12);
-        SyncTilemapAroundPlayer(BackgroundTilemap, bgDynemicsTilemap, 12);
+        frameCounter++;
+        Vector3Int currentCell = blocksTilemap.WorldToCell(player.position);
+
+        if (frameCounter % 5 == 0 || currentCell != lastPlayerCell)
+        {
+            SyncTilemapAroundPlayer(blocksTilemap, physicalTilemap, 4);
+            SyncTilemapAroundPlayer(blocksTilemap, displayTilemap, 12);
+            SyncTilemapAroundPlayer(BackgroundTilemap, bgDynemicsTilemap, 12);
+            lastPlayerCell = currentCell;
+        }
     }
 
     void SyncTilemapAroundPlayer(Tilemap sourceTilemap, Tilemap targetTilemap, int copyRadius)

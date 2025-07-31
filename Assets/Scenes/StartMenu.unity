@@ -483,7 +483,7 @@ MonoBehaviour:
   _HightLightSprite: {fileID: 31767036168983123, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _SelectedSprite: {fileID: 3848092710052293630, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _image: {fileID: 405017604}
-  _worldSizeID: 3
+  _worldSize: 2
 --- !u!1 &498758483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   _HightLightSprite: {fileID: -1951282980292565630, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _SelectedSprite: {fileID: 3769886162761816763, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _image: {fileID: 1887719292}
-  _worldSizeID: 1
+  _worldSize: 0
 --- !u!1 &1931583501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2078,7 @@ MonoBehaviour:
   _HightLightSprite: {fileID: -6454539539128827276, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _SelectedSprite: {fileID: -2457256581081411666, guid: fd80c43b457f8ae4baca171799670796, type: 3}
   _image: {fileID: 1931583504}
-  _worldSizeID: 2
+  _worldSize: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

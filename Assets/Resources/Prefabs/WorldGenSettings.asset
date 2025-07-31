@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b3838d907785a4b8b45c14c41f9d19, type: 3}
+  m_Name: WorldGenSettings
+  m_EditorClassIdentifier: 
+  spawnClearRadius: 6
+  worldRadius: 64
+  spawnRadius: 6
+  worldEdgeSize: 16
+  spaceBetweenWorldAndEdge: 0
+  nearEdgeBlockRadius: 16
+  airNoiseScale: 0.07
+  airMinThreshold: 0.65
+  airMaxThreshold: 1
+  dirtNoiseScale: 0.05
+  dirtMinThreshold: 0.5
+  dirtMaxThreshold: 1
+  tunnelCount: 32
+  tunnelLength: 12
+  tunnelCurvature: 0.5
+  tunnelBlock: 90
+  baseBlock: 55
+  edgeBlock: -1
+  dirtBlock: 25
+  airBlock: 0
+  nearEdgeBlock: 75

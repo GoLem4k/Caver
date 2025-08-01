@@ -61,7 +61,7 @@ public class TerrainGenerator : MonoBehaviour
         IterateCircle(center, radius, pos =>
         {
             float noise = Mathf.PerlinNoise((pos.x + seed) * noiseScale, (pos.y + seed) * noiseScale);
-            if (noise >= minT && noise <= maxT && TileManager.IsBlockOnPos(pos, onlyOnType))
+            if (noise >= minT && noise <= maxT && tileManager.IsBlockOnPos(pos, onlyOnType))
                 tileManager.SetCell(pos, placeType);
         });
     }

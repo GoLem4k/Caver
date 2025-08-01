@@ -15,7 +15,6 @@ public class Structure : PausedBehaviour
     public void Initialize()
     {
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        StructureManager.I.AddStructure(this);
         OnInitialize();
     }
 

@@ -9,7 +9,8 @@ public class StructureManager : MonoBehaviour
     private Dictionary<Vector3Int, Structure> _structurePool;
 
     [SerializeField] private GameObject _fireBowl;
-    [SerializeField] private GameObject _altar;
+    [SerializeField] private GameObject[] _altar;
+    private int altarID;
 
     public void Initialize()
     {
@@ -40,7 +41,7 @@ public class StructureManager : MonoBehaviour
     public bool TrySpawnStructure(Vector3Int pos, StructureType type)
     {
         GameObject structure;
-        if (!IsStructureOnPos(pos))
+        if (!IsStructureOnPos(pos) && !TileManager.I.IsBlockOnPos(pos))
         {
             switch (type)
             {
@@ -48,7 +49,7 @@ public class StructureManager : MonoBehaviour
                     structure = _fireBowl;
                     break;
                 case StructureType.Altar:
-                    structure = _altar;
+                    structure = _altar[altarID++];
                     break;
                 default:
                     Debug.Log("Неудачная попытка заспавнить структуру, структура не определена");
@@ -58,14 +59,15 @@ public class StructureManager : MonoBehaviour
             structure.transform.position = pos + new Vector3(0.5f, 0.5f);
             GameObject newStruct = Instantiate(structure);
             _structurePool.Add(pos, newStruct.GetComponent<Structure>());
-            
-        }
+            newStruct.GetComponent<Structure>().Initialize();
+
+        } else return false;
         return true;
     }
 
     public bool IsStructureOnPos(Vector3Int pos)
     {
-        return _structurePool[pos] != null;
+        return _structurePool.ContainsKey(pos);
     }
     
     public void GetStructurePositions()

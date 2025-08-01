@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 76670675}
   - component: {fileID: 76670676}
   - component: {fileID: 76670677}
+  - component: {fileID: 76670678}
   m_Layer: 0
   m_Name: worldGenerator
   m_TagString: Untagged
@@ -351,6 +352,7 @@ MonoBehaviour:
   terrainGenerator: {fileID: 76670675}
   spawnZoneGenerator: {fileID: 76670676}
   tunnelGenerator: {fileID: 76670677}
+  structureGenerator: {fileID: 76670678}
 --- !u!114 &76670675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +392,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileManager: {fileID: 1972354365}
+--- !u!114 &76670678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76670671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d375e5dd1c1b04dafe3501169bc97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileManager: {fileID: 1972354365}
+  structureManager: {fileID: 576026046}
 --- !u!1 &103489617
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,8 +2144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3368e33b61b441419fccd72cb51c7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireBowl: {fileID: 0}
-  _altar: {fileID: 0}
+  _fireBowl: {fileID: 9064587689885789958, guid: ad5bbaf068e90b34eb5f4a0e2b000bc6, type: 3}
+  _altar:
+  - {fileID: 6467349775753138247, guid: f75442c0959795a4aa6f18efef95b49d, type: 3}
+  - {fileID: 6467349775753138247, guid: 410ac86721ee5ef478a6d4fb76d412ce, type: 3}
+  - {fileID: 6467349775753138247, guid: a3541a935b00c0c4b8523d090d0e8409, type: 3}
+  - {fileID: 6467349775753138247, guid: 9d05173f82c551e49936de9025d9016d, type: 3}
 --- !u!1 &614951990
 GameObject:
   m_ObjectHideFlags: 0

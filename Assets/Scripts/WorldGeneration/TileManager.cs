@@ -202,7 +202,7 @@ public class TileManager : PausedBehaviour
         BlocksTilemap.SetTile(pos, null);
     }
 
-    public static bool IsBlockOnPos(Vector3Int pos, BlockType type)
+    public bool IsBlockOnPos(Vector3Int pos, BlockType type)
     {
         var tile = BlocksTilemap.GetTile(pos);
 
@@ -213,7 +213,7 @@ public class TileManager : PausedBehaviour
         return tile is BlockTile blockTile && blockTile.type == type;
     }
 
-    public static bool IsBlockOnPos(Vector3Int pos)
+    public bool IsBlockOnPos(Vector3Int pos)
     {
         var tile = BlocksTilemap.GetTile(pos);
         return tile != null;

@@ -7,6 +7,7 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private SpawnZoneGenerator spawnZoneGenerator;
     [SerializeField] private TunnelGenerator tunnelGenerator;
+    [SerializeField] private StructureGenerator structureGenerator;
     private System.Random rng;
 
     public void Initialize()
@@ -23,6 +24,10 @@ public class WorldGenerator : MonoBehaviour
         tunnelGenerator.GenerateTunnels(seed, Vector3Int.zero, settings.worldRadius - settings.nearEdgeBlockRadius/2, settings);
         
         spawnZoneGenerator.ClearSpawnZone(spawn, settings.spawnClearRadius);
+        
+        structureGenerator.GenerateFireBowls(seed, settings);
+        
+        
     }
     
     public Vector3Int GetRandomPointOnCircle(Vector3Int center, int radius)

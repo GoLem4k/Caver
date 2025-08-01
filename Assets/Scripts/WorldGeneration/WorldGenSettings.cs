@@ -29,6 +29,8 @@ public class WorldGenSettings : ScriptableObject
     public float tunnelCurvature = 0.3f;
     public BlockType tunnelBlock = BlockType.Magicstone;
 
+    [Header("Fire Bowl")] public int chunckSize = 16;
+
     [Header("Обычные блоки")]
     public BlockType baseBlock = BlockType.Stone;
     public BlockType edgeBlock = BlockType.Darkstone;

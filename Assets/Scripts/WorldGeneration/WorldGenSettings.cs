@@ -44,7 +44,7 @@ public class WorldGenSettings : ScriptableObject
         {
             case WorldSize.Small:
                 worldRadius = 64;
-                spawnClearRadius = 6;
+                spawnRadius = 8;
                 tunnelCount = 64;
                 tunnelLength = 8;
                 nearEdgeBlockRadius = 16;
@@ -52,7 +52,7 @@ public class WorldGenSettings : ScriptableObject
 
             case WorldSize.Medium:
                 worldRadius = 96;
-                spawnClearRadius = 8;
+                spawnRadius = 12;
                 tunnelCount = 64;
                 tunnelLength = 12;
                 nearEdgeBlockRadius = 24;
@@ -60,14 +60,13 @@ public class WorldGenSettings : ScriptableObject
 
             case WorldSize.Large:
                 worldRadius = 128;
-                spawnClearRadius = 10;
+                spawnRadius = 16;
                 tunnelCount = 64;
                 tunnelLength = 16;
                 nearEdgeBlockRadius = 32;
                 break;
         }
 
-        spawnRadius = spawnClearRadius;
         worldEdgeSize = 16;
         spaceBetweenWorldAndEdge = 0;
     }

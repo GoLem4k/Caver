@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GlobalRunData
   m_EditorClassIdentifier: 
   WorldSize: 0
-  SEED: 12345
+  SEED: 400

@@ -25,7 +25,7 @@ public class WorldGenerator : MonoBehaviour
         
         spawnZoneGenerator.ClearSpawnZone(spawn, settings.spawnClearRadius);
         
-        structureGenerator.GenerateFireBowls(seed, settings);
+        structureGenerator.GenerateStructures(seed, settings);
         
         
     }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b3838d907785a4b8b45c14c41f9d19, type: 3}
   m_Name: WorldGenSettings
   m_EditorClassIdentifier: 
-  spawnClearRadius: 6
+  spawnClearRadius: 5
   worldRadius: 64
-  spawnRadius: 6
+  spawnRadius: 8
   worldEdgeSize: 16
   spaceBetweenWorldAndEdge: 0
   nearEdgeBlockRadius: 16
@@ -24,10 +24,11 @@ MonoBehaviour:
   dirtNoiseScale: 0.05
   dirtMinThreshold: 0.5
   dirtMaxThreshold: 1
-  tunnelCount: 32
-  tunnelLength: 12
+  tunnelCount: 64
+  tunnelLength: 8
   tunnelCurvature: 0.5
   tunnelBlock: 90
+  chunckSize: 32
   baseBlock: 55
   edgeBlock: -1
   dirtBlock: 25

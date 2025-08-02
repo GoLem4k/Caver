@@ -12,6 +12,17 @@ public class StructureManager : MonoBehaviour
     [SerializeField] private GameObject[] _altar;
     private int altarID;
 
+    public Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
+        new Vector3Int(1, 0, 0),     // справа
+        new Vector3Int(-1, 0, 0),    // слева
+        new Vector3Int(0, 1, 0),     // сверху
+        new Vector3Int(0, -1, 0),    // снизу
+        new Vector3Int(-1, 1, 0),    // сверху и слева
+        new Vector3Int(1, 1, 0),    // сверху и справа
+        new Vector3Int(-1, -1, 0),    // снизу и слева
+        new Vector3Int(1, -1, 0)    // снизу и справа
+    };
+    
     public void Initialize()
     {
         if (I == null) I = this;
@@ -38,10 +49,10 @@ public class StructureManager : MonoBehaviour
         }
     }
 
-    public bool TrySpawnStructure(Vector3Int pos, StructureType type)
+    public bool TrySpawnStructure(Vector3Int pos, StructureType type, bool isForced = false)
     {
         GameObject structure;
-        if (!IsStructureOnPos(pos) && !TileManager.I.IsBlockOnPos(pos))
+        if ((!IsStructureOnPos(pos) && !TileManager.I.IsBlockOnPos(pos)) || isForced)
         {
             switch (type)
             {
@@ -56,6 +67,14 @@ public class StructureManager : MonoBehaviour
                     return false;
             }
 
+            if (isForced)
+            {
+                foreach (var offset in NEIGHBOURS8X)
+                {
+                    TileManager.I.SetCell(pos + offset, BlockType.None);
+                }
+            }
+            
             structure.transform.position = pos + new Vector3(0.5f, 0.5f);
             GameObject newStruct = Instantiate(structure);
             _structurePool.Add(pos, newStruct.GetComponent<Structure>());

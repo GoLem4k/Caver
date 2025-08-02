@@ -53,7 +53,7 @@ public class TileManager : PausedBehaviour
     Vector3 lastPlayerCell;
     int frameCounter;
     
-    public static Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
+    public Vector3Int[] NEIGHBOURS8X = new Vector3Int[] {
         new Vector3Int(1, 0, 0),     // справа
         new Vector3Int(-1, 0, 0),    // слева
         new Vector3Int(0, 1, 0),     // сверху
@@ -64,7 +64,7 @@ public class TileManager : PausedBehaviour
         new Vector3Int(1, -1, 0)    // снизу и справа
     };
     
-    public static Vector3Int[] NEIGHBOURS4X = new Vector3Int[] {
+    public Vector3Int[] NEIGHBOURS4X = new Vector3Int[] {
         new Vector3Int(1, 0, 0),     // справа
         new Vector3Int(-1, 0, 0),    // слева
         new Vector3Int(0, 1, 0),     // сверху
